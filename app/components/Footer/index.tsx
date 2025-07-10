@@ -195,7 +195,7 @@ const Nav = () => {
 								</span>{" "}
 								<div className="z-10 flex flex-col items-center">
 									<span className="lg:text-xl font-medium duration-150 xl:text-3xl dark:text-zinc-200 dark:group-hover:text-white font-sans">
-										Mohammad Javad Sepahi
+										Emjay Sepahi
 									</span>
 									<span className="mt-4 text-sm text-center duration-1000 dark:text-zinc-400 dark:group-hover:text-zinc-200">
 										Call me
@@ -232,7 +232,7 @@ const Nav = () => {
 				<div className="flex flex-col gap-2">
 					<Card>
 						<Link
-							href="mailto:mjs32841@gmail.com"
+							href="mailto:contact@emjaysepahi.com"
 							target="_blank"
 							className="p-4 relative flex flex-col w-auto md:w-full items-center justify-center gap-4 duration-700 group lg:gap-2 lg:py-36 lg:p-16"
 						>
@@ -245,10 +245,10 @@ const Nav = () => {
 							</span>{" "}
 							<div className="z-10 flex flex-col items-center">
 								<span className="lg:text-xl font-medium duration-150 xl:text-3xl dark:text-zinc-200 dark:group-hover:text-white font-sans">
-									mjs32841
+									Email
 								</span>
 								<span className="mt-4 text-sm text-center duration-1000 dark:text-zinc-400 dark:group-hover:text-zinc-200">
-									Email
+									Let's talk
 								</span>
 							</div>
 						</Link>

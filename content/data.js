@@ -2,10 +2,10 @@ export const projects = [
 	{
 		title: "Kerpino MVP",
 		description:
-			"Immersive Unreal Pixel Streaming Platform: A Cutting-Edge Virtual Showroom for Interactive Interior Design Experiences",
+			"Immersive Unreal Pixel Streaming Platform: A Cutting-Edge Virtual Showroom for Interactive Interior Design Experiences. Plan floor image to 3D interactive unrela engine world.",
 		src: "kerpo.jpg",
 		images: [],
-		link: "https://app.kerpino.io/",
+		link: "https://kerpino.vercel.app/",
 		git_link: "https://github.com/emjayi/kerpino",
 		color: "#008b8b",
 	},
@@ -15,7 +15,7 @@ export const projects = [
 			"Baroque Company was founded in 2010 by Engineer Hasan Roshanayi Moghadam, after his 1982 graduation from Ferdowsi University of Mashhad (Civil Engineering). With years of experience in major construction projects, the company was established to incorporate modern techniques and a new generation of specialists.",
 		src: "baroque.png",
 		images: [],
-		link: "https://baroquegp.com/",
+		link: "https://baroque-seven.vercel.app/",
 		git_link: "https://github.com/Emjayi/baroque-next",
 		color: "#96751e",
 	},

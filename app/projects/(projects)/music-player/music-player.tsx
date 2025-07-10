@@ -4,704 +4,700 @@ import type React from "react";
 
 // Extend the Window interface to include the SC property
 declare global {
-	interface Window {
-		SC?: any;
-	}
+  interface Window {
+    SC?: any;
+  }
 }
 import { useState, useRef, useEffect } from "react";
 import {
-	Play,
-	Pause,
-	SkipBack,
-	SkipForward,
-	Shuffle,
-	Search,
-	Download,
-	Moon,
-	Sun,
-	Palette,
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Shuffle,
+  Search,
+  Download,
+  Moon,
+  Sun,
+  Palette,
 } from "lucide-react";
 
 interface SoundCloudTrack {
-	title: string;
-	artwork_url: string | null;
-	user: {
-		username: string;
-	};
-	duration: number;
-	permalink_url: string;
-	downloadable?: boolean;
-	download_url?: string;
+  title: string;
+  artwork_url: string | null;
+  user: {
+    username: string;
+  };
+  duration: number;
+  permalink_url: string;
+  downloadable?: boolean;
+  download_url?: string;
 }
 
 type Theme = "classic" | "dark" | "retro";
 
 export default function MusicPlayer() {
-	// State management
-	const [isPlaying, setIsPlaying] = useState(false);
-	const [currentTime, setCurrentTime] = useState(0);
-	const [duration, setDuration] = useState(0);
-	const [volume, setVolume] = useState(90);
-	const [bass, setBass] = useState(50);
-	const [treble, setTreble] = useState(50);
-	const [soundCloudUrl, setSoundCloudUrl] = useState("");
-	const [trackInfo, setTrackInfo] = useState<SoundCloudTrack | null>(null);
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
-	const [iframeUrl, setIframeUrl] = useState<string | null>(null);
-	const [isDraggingProgress, setIsDraggingProgress] = useState(false);
-	const [theme, setTheme] = useState<Theme>("classic");
-	const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
-	const [isDownloading, setIsDownloading] = useState(false);
-	const [activeKnob, setActiveKnob] = useState<string | null>(null);
-	const [knobStartY, setKnobStartY] = useState(0);
-	const [knobStartValue, setKnobStartValue] = useState(0);
-	const [isInitializing, setIsInitializing] = useState(true);
-
-	// Refs
-	const progressRef = useRef<HTMLInputElement>(null);
-	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const widgetRef = useRef<any>(null);
-	const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
-	const volumeKnobRef = useRef<HTMLDivElement>(null);
-	const bassKnobRef = useRef<HTMLDivElement>(null);
-	const trebleKnobRef = useRef<HTMLDivElement>(null);
-
-	// Preload SoundCloud API
-	useEffect(() => {
-		const preloadSoundCloudAPI = () => {
-			const link = document.createElement("link");
-			link.rel = "preload";
-			link.href = "https://w.soundcloud.com/player/api.js";
-			link.as = "script";
-			document.head.appendChild(link);
-
-			// Then load the actual script
-			const script = document.createElement("script");
-			script.src = "https://w.soundcloud.com/player/api.js";
-			script.async = true;
-			document.body.appendChild(script);
-
-			return () => {
-				document.body.removeChild(script);
-				document.head.removeChild(link);
-			};
-		};
-
-		return preloadSoundCloudAPI();
-	}, []);
-
-	// Add this at the beginning of the component
-	useEffect(() => {
-		// Simulate initialization to prevent layout shifts
-		const timer = setTimeout(() => {
-			setIsInitializing(false);
-		}, 300);
-
-		return () => clearTimeout(timer);
-	}, []);
-
-	// Load SoundCloud Widget API
-	useEffect(() => {
-		const script = document.createElement("script");
-		script.src = "https://w.soundcloud.com/player/api.js";
-		script.async = true;
-		document.body.appendChild(script);
-
-		return () => {
-			document.body.removeChild(script);
-		};
-	}, []);
-
-	// Setup progress tracking interval
-	useEffect(() => {
-		if (widgetRef.current && isPlaying && !isDraggingProgress) {
-			// Clear any existing interval
-			if (progressIntervalRef.current) {
-				clearInterval(progressIntervalRef.current);
-			}
-
-			// Create new interval to update progress
-			progressIntervalRef.current = setInterval(() => {
-				widgetRef.current.getPosition((position: number) => {
-					setCurrentTime(Math.floor(position / 1000));
-				});
-			}, 100); // Update more frequently for smoother progress
-		} else if (progressIntervalRef.current) {
-			clearInterval(progressIntervalRef.current);
-		}
-
-		return () => {
-			if (progressIntervalRef.current) {
-				clearInterval(progressIntervalRef.current);
-			}
-		};
-	}, [isPlaying, isDraggingProgress]);
-
-	// Initialize SoundCloud Widget when iframe URL changes
-	useEffect(() => {
-		if (!iframeUrl || !window.SC) return;
-
-		const setupWidget = () => {
-			if (iframeRef.current) {
-				widgetRef.current = window.SC.Widget(iframeRef.current);
-
-				widgetRef.current.bind(window.SC.Widget.Events.READY, () => {
-					// Apply boosted volume
-					applyVolumeBoost(volume);
-
-					// Get duration when ready
-					widgetRef.current.getDuration((durationMs: number) => {
-						setDuration(Math.floor(durationMs / 1000));
-					});
-
-					// Bind play event
-					widgetRef.current.bind(window.SC.Widget.Events.PLAY, () => {
-						setIsPlaying(true);
-						// Ensure boosted volume is applied when playback starts
-						applyVolumeBoost(volume);
-					});
-
-					// Bind pause event
-					widgetRef.current.bind(window.SC.Widget.Events.PAUSE, () => {
-						setIsPlaying(false);
-					});
-
-					// Bind finish event
-					widgetRef.current.bind(window.SC.Widget.Events.FINISH, () => {
-						setIsPlaying(false);
-						setCurrentTime(0);
-					});
-				});
-			}
-		};
-
-		if (window.SC) {
-			setupWidget();
-		} else {
-			window.addEventListener("scWidgetApiReady", setupWidget);
-		}
-
-		return () => {
-			window.removeEventListener("scWidgetApiReady", setupWidget);
-		};
-	}, [iframeUrl, volume]);
-
-	// Ensure volume changes are applied to the widget
-	useEffect(() => {
-		if (widgetRef.current) {
-			widgetRef.current.setVolume(volume / 100);
-		}
-	}, [volume]);
-
-	// Setup global mouse/touch event listeners for knob control
-	useEffect(() => {
-		const handleMouseMove = (e: MouseEvent) => {
-			if (activeKnob) {
-				handleKnobMove(e.clientY);
-			}
-		};
-
-		const handleTouchMove = (e: TouchEvent) => {
-			if (activeKnob && e.touches[0]) {
-				handleKnobMove(e.touches[0].clientY);
-			}
-		};
-
-		const handleMouseUp = () => {
-			setActiveKnob(null);
-		};
-
-		if (activeKnob) {
-			window.addEventListener("mousemove", handleMouseMove);
-			window.addEventListener("touchmove", handleTouchMove, { passive: false });
-			window.addEventListener("mouseup", handleMouseUp);
-			window.addEventListener("touchend", handleMouseUp);
-		}
-
-		return () => {
-			window.removeEventListener("mousemove", handleMouseMove);
-			window.removeEventListener("touchmove", handleTouchMove);
-			window.removeEventListener("mouseup", handleMouseUp);
-			window.removeEventListener("touchend", handleMouseUp);
-		};
-	}, [activeKnob]);
-
-	// Format time display (mm:ss)
-	const formatTime = (time: number) => {
-		const minutes = Math.floor(time / 60);
-		const seconds = Math.floor(time % 60);
-		return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-	};
-
-	// Toggle play/pause
-	const togglePlay = () => {
-		if (widgetRef.current) {
-			if (isPlaying) {
-				widgetRef.current.pause();
-			} else {
-				widgetRef.current.play();
-			}
-		}
-	};
-
-	// Handle progress bar change
-	const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newTime = Number.parseInt(e.target.value);
-		setCurrentTime(newTime);
-
-		if (widgetRef.current) {
-			widgetRef.current.seekTo(newTime * 1000);
-		}
-	};
-
-	// Handle progress bar interaction start
-	const handleProgressDragStart = () => {
-		setIsDraggingProgress(true);
-	};
-
-	// Handle progress bar interaction end
-	const handleProgressDragEnd = () => {
-		setIsDraggingProgress(false);
-	};
-
-	// Add this function after the handleVolumeChange function
-	// Volume boost function to enhance audio levels
-	const applyVolumeBoost = (baseVolume: number) => {
-		// Apply a non-linear curve to boost volume at lower levels
-		// This helps with SoundCloud's sometimes quiet tracks
-		const boostedVolume = Math.min(1, Math.pow(baseVolume / 100, 0.8));
-
-		if (widgetRef.current) {
-			widgetRef.current.setVolume(boostedVolume);
-			console.log("Applied volume boost:", boostedVolume);
-		}
-
-		return boostedVolume * 100;
-	};
-
-	// Handle volume change
-	const handleVolumeChange = (newVolume: number) => {
-		// Ensure volume is within bounds
-		const boundedVolume = Math.max(0, Math.min(100, newVolume));
-		setVolume(boundedVolume);
-
-		// Apply the volume boost
-		applyVolumeBoost(boundedVolume);
-	};
-
-	// Handle knob mouse/touch down
-	const handleKnobDown = (
-		knobType: string,
-		e: React.MouseEvent | React.TouchEvent,
-	) => {
-		e.preventDefault();
-
-		// Get the starting Y position
-		const clientY =
-			"touches" in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
-
-		setKnobStartY(clientY);
-		setActiveKnob(knobType);
-
-		// Set the starting value based on knob type
-		if (knobType === "volume") {
-			setKnobStartValue(volume);
-		} else if (knobType === "bass") {
-			setKnobStartValue(bass);
-		} else if (knobType === "treble") {
-			setKnobStartValue(treble);
-		}
-	};
-
-	// Handle knob movement
-	const handleKnobMove = (clientY: number) => {
-		if (!activeKnob) return;
-
-		// Calculate the change in Y position (negative for upward movement)
-		const deltaY = knobStartY - clientY;
-
-		// Scale the movement (adjust sensitivity as needed)
-		const valueChange = Math.round(deltaY * 0.5);
-
-		// Update the appropriate value based on active knob
-		if (activeKnob === "volume") {
-			const newVolume = Math.max(
-				0,
-				Math.min(100, knobStartValue + valueChange),
-			);
-			handleVolumeChange(newVolume);
-		} else if (activeKnob === "bass") {
-			const newBass = Math.max(0, Math.min(100, knobStartValue + valueChange));
-			setBass(newBass);
-		} else if (activeKnob === "treble") {
-			const newTreble = Math.max(
-				0,
-				Math.min(100, knobStartValue + valueChange),
-			);
-			setTreble(newTreble);
-		}
-	};
-
-	// Change theme
-	const cycleTheme = () => {
-		if (theme === "classic") setTheme("dark");
-		else if (theme === "dark") setTheme("retro");
-		else setTheme("classic");
-	};
-
-	// Fetch track from SoundCloud
-	const fetchSoundCloudTrack = async () => {
-		if (!soundCloudUrl.trim()) {
-			setError("Please enter a SoundCloud URL");
-			return;
-		}
-
-		setIsLoading(true);
-		setError(null);
-		setDownloadUrl(null);
-
-		try {
-			// Validate URL format
-			let url: URL;
-			try {
-				url = new URL(soundCloudUrl);
-				if (!url.hostname.includes("soundcloud.com")) {
-					throw new Error("Not a valid SoundCloud URL");
-				}
-			} catch (e) {
-				throw new Error("Please enter a valid URL");
-			}
-
-			// Set the iframe URL for the SoundCloud widget
-			const widgetUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
-				soundCloudUrl,
-			)}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
-			setIframeUrl(widgetUrl);
-
-			// Fetch track info from SoundCloud oEmbed API
-			const oEmbedUrl = `https://soundcloud.com/oembed?url=${encodeURIComponent(
-				soundCloudUrl,
-			)}&format=json`;
-			const response = await fetch(oEmbedUrl);
-
-			if (!response.ok) {
-				throw new Error("Failed to fetch track information");
-			}
-
-			const data = await response.json();
-
-			// Extract track title and author from oEmbed response
-			setTrackInfo({
-				title: data.title || "Unknown Track",
-				artwork_url: null, // oEmbed doesn't provide artwork
-				user: {
-					username: data.author_name || "Unknown Artist",
-				},
-				duration: 0, // Will be set by the widget
-				permalink_url: soundCloudUrl,
-			});
-
-			// Set download URL
-			setDownloadUrl(soundCloudUrl);
-
-			// Reset playback state
-			setIsPlaying(false);
-			setCurrentTime(0);
-		} catch (err) {
-			console.error(err);
-			setError(err instanceof Error ? err.message : "Failed to load track");
-			setTrackInfo(null);
-			setIframeUrl(null);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	// Handle download with Python backend
-	const handleDownload = () => {
-		if (downloadUrl) {
-			window.open(downloadUrl, "_blank");
-		}
-	};
-
-	// Fallback download (open in SoundCloud)
-	const handleOpenInSoundCloud = () => {
-		if (downloadUrl) {
-			window.open(downloadUrl, "_blank");
-		}
-	};
-
-	return (
-		<>
-			<div className={`player-wrapper ${theme}`}>
-				{isInitializing ? (
-					<div className="initializing-overlay">
-						<div className="loading-spinner large" />
-					</div>
-				) : null}
-				<div className="music-player-container">
-					{/* Metallic frame with texture */}
-					<div className="metallic-texture" />
-
-					<div className="player-body">
-						{/* Top screws for realistic hardware look */}
-						<div className="screw top-left" />
-						<div className="screw top-right" />
-
-						{/* SoundCloud URL input */}
-						<div className="soundcloud-input">
-							<div className="input-container">
-								<input
-									type="text"
-									value={soundCloudUrl}
-									onChange={(e) => setSoundCloudUrl(e.target.value)}
-									placeholder="Enter SoundCloud URL"
-									className="url-input"
-								/>
-								<button
-									onClick={fetchSoundCloudTrack}
-									disabled={isLoading}
-									className="load-button"
-								>
-									{isLoading ? (
-										<div className="loading-spinner" />
-									) : (
-										<>
-											<Search className="search-icon" />
-											<span>Load Track</span>
-										</>
-									)}
-								</button>
-							</div>
-							{error && <div className="error-message">{error}</div>}
-						</div>
-
-						{/* Theme switcher */}
-						<button
-							onClick={cycleTheme}
-							className="theme-switcher"
-							aria-label="Change theme"
-						>
-							{theme === "classic" ? (
-								<Moon className="theme-icon" />
-							) : theme === "dark" ? (
-								<Palette className="theme-icon" />
-							) : (
-								<Sun className="theme-icon" />
-							)}
-						</button>
-
-						{/* Hidden SoundCloud iframe */}
-						{iframeUrl && (
-							<iframe
-								ref={iframeRef}
-								width="100%"
-								height="0"
-								scrolling="no"
-								frameBorder="no"
-								allow="autoplay"
-								src={iframeUrl}
-								className="hidden-iframe"
-							/>
-						)}
-
-						{/* Digital display */}
-						<div className="display-panel">
-							<div className="digital-display">
-								<div className="display-header">
-									<div className="display-label">NOW PLAYING</div>
-									<div className="display-status">
-										{isPlaying ? "PLAYING" : "PAUSED"}
-									</div>
-								</div>
-								<div className="track-title">
-									{trackInfo ? trackInfo.title : "No Track Loaded"}
-								</div>
-								<div className="track-artist">
-									{trackInfo
-										? trackInfo.user.username
-										: "Load a SoundCloud track to begin"}
-								</div>
-								<div className="time-display">
-									<div>{formatTime(currentTime)}</div>
-									<div>{formatTime(duration)}</div>
-								</div>
-							</div>
-						</div>
-
-						{/* Progress slider */}
-						<div className="progress-container">
-							<input
-								ref={progressRef}
-								type="range"
-								min="0"
-								max={duration || 100}
-								value={currentTime}
-								onChange={handleProgressChange}
-								onMouseDown={handleProgressDragStart}
-								onMouseUp={handleProgressDragEnd}
-								onTouchStart={handleProgressDragStart}
-								onTouchEnd={handleProgressDragEnd}
-								disabled={!trackInfo}
-								className="progress-slider"
-								style={{
-									backgroundSize: `${
-										duration ? (currentTime / duration) * 100 : 0
-									}% 100%`,
-								}}
-							/>
-						</div>
-
-						{/* Control buttons */}
-						<div className="controls-panel">
-							<button
-								className="control-button shuffle-button"
-								disabled={!trackInfo}
-							>
-								<Shuffle className="button-icon" />
-							</button>
-
-							<button
-								className="control-button prev-button"
-								disabled={!trackInfo}
-							>
-								<SkipBack className="button-icon" />
-							</button>
-
-							<button
-								onClick={togglePlay}
-								disabled={!trackInfo}
-								className="play-button"
-							>
-								{isPlaying ? (
-									<Pause className="play-icon" />
-								) : (
-									<Play className="play-icon play-offset" />
-								)}
-							</button>
-
-							<button
-								className="control-button next-button"
-								disabled={!trackInfo}
-							>
-								<SkipForward className="button-icon" />
-							</button>
-
-							<button
-								onClick={handleOpenInSoundCloud}
-								disabled={!downloadUrl || isDownloading}
-								className="control-button download-button"
-								title="Open in SoundCloud"
-							>
-								{isDownloading ? (
-									<div className="loading-spinner small" />
-								) : (
-									<Download className="button-icon" />
-								)}
-							</button>
-						</div>
-
-						{/* Python download button */}
-						{downloadUrl && (
-							<div className="download-container">
-								<button
-									onClick={handleDownload}
-									className="python-download-button"
-								>
-									Open in SoundCloud
-								</button>
-								<div className="download-hint">
-									To download, open in SoundCloud and use the download button
-									there if available
-								</div>
-							</div>
-						)}
-
-						{/* Knobs and sliders panel */}
-						<div className="knobs-panel">
-							{/* Volume knob */}
-							<div className="knob-container">
-								<div className="knob-label">VOLUME</div>
-								<div
-									ref={volumeKnobRef}
-									className={`knob volume-knob ${
-										activeKnob === "volume" ? "active" : ""
-									}`}
-									onMouseDown={(e) => handleKnobDown("volume", e)}
-									onTouchStart={(e) => handleKnobDown("volume", e)}
-								>
-									<div
-										className="knob-indicator"
-										style={{
-											transform: `translateX(-50%) rotate(${volume * 2.7}deg)`,
-										}}
-									/>
-									<div className="knob-center" />
-									<div className="knob-value-display">{volume}%</div>
-								</div>
-								<div className="knob-value">{volume}%</div>
-								<div className="knob-touch-hint">Drag up/down to adjust</div>
-							</div>
-
-							{/* Bass knob */}
-							<div className="knob-container">
-								<div className="knob-label">BASS</div>
-								<div
-									ref={bassKnobRef}
-									className={`knob bass-knob ${
-										activeKnob === "bass" ? "active" : ""
-									}`}
-									onMouseDown={(e) => handleKnobDown("bass", e)}
-									onTouchStart={(e) => handleKnobDown("bass", e)}
-								>
-									<div
-										className="knob-indicator"
-										style={{
-											transform: `translateX(-50%) rotate(${bass * 2.7}deg)`,
-										}}
-									/>
-									<div className="knob-center" />
-									<div className="knob-value-display">{bass}%</div>
-								</div>
-								<div className="knob-value">{bass}%</div>
-								<div className="knob-touch-hint">Drag up/down to adjust</div>
-							</div>
-
-							{/* Treble knob */}
-							<div className="knob-container">
-								<div className="knob-label">TREBLE</div>
-								<div
-									ref={trebleKnobRef}
-									className={`knob treble-knob ${
-										activeKnob === "treble" ? "active" : ""
-									}`}
-									onMouseDown={(e) => handleKnobDown("treble", e)}
-									onTouchStart={(e) => handleKnobDown("treble", e)}
-								>
-									<div
-										className="knob-indicator"
-										style={{
-											transform: `translateX(-50%) rotate(${treble * 2.7}deg)`,
-										}}
-									/>
-									<div className="knob-center" />
-									<div className="knob-value-display">{treble}%</div>
-								</div>
-								<div className="knob-value">{treble}%</div>
-								<div className="knob-touch-hint">Drag up/down to adjust</div>
-							</div>
-						</div>
-
-						{/* Bottom screws for realistic hardware look */}
-						<div className="screw bottom-left" />
-						<div className="screw bottom-right" />
-					</div>
-				</div>
-			</div>
-
-			{/* Component-scoped styling */}
-			<style jsx>{`
+  // State management
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(90);
+  const [bass, setBass] = useState(50);
+  const [treble, setTreble] = useState(50);
+  const [soundCloudUrl, setSoundCloudUrl] = useState("");
+  const [trackInfo, setTrackInfo] = useState<SoundCloudTrack | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [iframeUrl, setIframeUrl] = useState<string | null>(null);
+  const [isDraggingProgress, setIsDraggingProgress] = useState(false);
+  const [theme, setTheme] = useState<Theme>("classic");
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [activeKnob, setActiveKnob] = useState<string | null>(null);
+  const [knobStartY, setKnobStartY] = useState(0);
+  const [knobStartValue, setKnobStartValue] = useState(0);
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  // Refs
+  const progressRef = useRef<HTMLInputElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const widgetRef = useRef<any>(null);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const volumeKnobRef = useRef<HTMLDivElement>(null);
+  const bassKnobRef = useRef<HTMLDivElement>(null);
+  const trebleKnobRef = useRef<HTMLDivElement>(null);
+
+  // Preload SoundCloud API
+  useEffect(() => {
+    const preloadSoundCloudAPI = () => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = "https://w.soundcloud.com/player/api.js";
+      link.as = "script";
+      document.head.appendChild(link);
+
+      // Then load the actual script
+      const script = document.createElement("script");
+      script.src = "https://w.soundcloud.com/player/api.js";
+      script.async = true;
+      document.body.appendChild(script);
+
+      return () => {
+        document.body.removeChild(script);
+        document.head.removeChild(link);
+      };
+    };
+
+    return preloadSoundCloudAPI();
+  }, []);
+
+  // Add this at the beginning of the component
+  useEffect(() => {
+    // Simulate initialization to prevent layout shifts
+    const timer = setTimeout(() => {
+      setIsInitializing(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Load SoundCloud Widget API
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://w.soundcloud.com/player/api.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // Setup progress tracking interval
+  useEffect(() => {
+    if (widgetRef.current && isPlaying && !isDraggingProgress) {
+      // Clear any existing interval
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+
+      // Create new interval to update progress
+      progressIntervalRef.current = setInterval(() => {
+        widgetRef.current.getPosition((position: number) => {
+          setCurrentTime(Math.floor(position / 1000));
+        });
+      }, 100); // Update more frequently for smoother progress
+    } else if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, [isPlaying, isDraggingProgress]);
+
+  // Initialize SoundCloud Widget when iframe URL changes
+  useEffect(() => {
+    if (!iframeUrl || !window.SC) return;
+
+    const setupWidget = () => {
+      if (iframeRef.current) {
+        widgetRef.current = window.SC.Widget(iframeRef.current);
+
+        widgetRef.current.bind(window.SC.Widget.Events.READY, () => {
+          // Apply boosted volume
+          applyVolumeBoost(volume);
+
+          // Get duration when ready
+          widgetRef.current.getDuration((durationMs: number) => {
+            setDuration(Math.floor(durationMs / 1000));
+          });
+
+          // Bind play event
+          widgetRef.current.bind(window.SC.Widget.Events.PLAY, () => {
+            setIsPlaying(true);
+            // Ensure boosted volume is applied when playback starts
+            applyVolumeBoost(volume);
+          });
+
+          // Bind pause event
+          widgetRef.current.bind(window.SC.Widget.Events.PAUSE, () => {
+            setIsPlaying(false);
+          });
+
+          // Bind finish event
+          widgetRef.current.bind(window.SC.Widget.Events.FINISH, () => {
+            setIsPlaying(false);
+            setCurrentTime(0);
+          });
+        });
+      }
+    };
+
+    if (window.SC) {
+      setupWidget();
+    } else {
+      window.addEventListener("scWidgetApiReady", setupWidget);
+    }
+
+    return () => {
+      window.removeEventListener("scWidgetApiReady", setupWidget);
+    };
+  }, [iframeUrl, volume]);
+
+  // Ensure volume changes are applied to the widget
+  useEffect(() => {
+    if (widgetRef.current) {
+      widgetRef.current.setVolume(volume / 100);
+    }
+  }, [volume]);
+
+  // Setup global mouse/touch event listeners for knob control
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (activeKnob) {
+        handleKnobMove(e.clientY);
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (activeKnob && e.touches[0]) {
+        handleKnobMove(e.touches[0].clientY);
+      }
+    };
+
+    const handleMouseUp = () => {
+      setActiveKnob(null);
+    };
+
+    if (activeKnob) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
+      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("touchend", handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchend", handleMouseUp);
+    };
+  }, [activeKnob]);
+
+  // Format time display (mm:ss)
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  // Toggle play/pause
+  const togglePlay = () => {
+    if (widgetRef.current) {
+      if (isPlaying) {
+        widgetRef.current.pause();
+      } else {
+        widgetRef.current.play();
+      }
+    }
+  };
+
+  // Handle progress bar change
+  const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTime = Number.parseInt(e.target.value);
+    setCurrentTime(newTime);
+
+    if (widgetRef.current) {
+      widgetRef.current.seekTo(newTime * 1000);
+    }
+  };
+
+  // Handle progress bar interaction start
+  const handleProgressDragStart = () => {
+    setIsDraggingProgress(true);
+  };
+
+  // Handle progress bar interaction end
+  const handleProgressDragEnd = () => {
+    setIsDraggingProgress(false);
+  };
+
+  // Add this function after the handleVolumeChange function
+  // Volume boost function to enhance audio levels
+  const applyVolumeBoost = (baseVolume: number) => {
+    // Apply a non-linear curve to boost volume at lower levels
+    // This helps with SoundCloud's sometimes quiet tracks
+    const boostedVolume = Math.min(1, Math.pow(baseVolume / 100, 0.8));
+
+    if (widgetRef.current) {
+      widgetRef.current.setVolume(boostedVolume);
+      console.log("Applied volume boost:", boostedVolume);
+    }
+
+    return boostedVolume * 100;
+  };
+
+  // Handle volume change
+  const handleVolumeChange = (newVolume: number) => {
+    // Ensure volume is within bounds
+    const boundedVolume = Math.max(0, Math.min(100, newVolume));
+    setVolume(boundedVolume);
+
+    // Apply the volume boost
+    applyVolumeBoost(boundedVolume);
+  };
+
+  // Handle knob mouse/touch down
+  const handleKnobDown = (
+    knobType: string,
+    e: React.MouseEvent | React.TouchEvent,
+  ) => {
+    e.preventDefault();
+
+    // Get the starting Y position
+    const clientY =
+      "touches" in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
+
+    setKnobStartY(clientY);
+    setActiveKnob(knobType);
+
+    // Set the starting value based on knob type
+    if (knobType === "volume") {
+      setKnobStartValue(volume);
+    } else if (knobType === "bass") {
+      setKnobStartValue(bass);
+    } else if (knobType === "treble") {
+      setKnobStartValue(treble);
+    }
+  };
+
+  // Handle knob movement
+  const handleKnobMove = (clientY: number) => {
+    if (!activeKnob) return;
+
+    // Calculate the change in Y position (negative for upward movement)
+    const deltaY = knobStartY - clientY;
+
+    // Scale the movement (adjust sensitivity as needed)
+    const valueChange = Math.round(deltaY * 0.5);
+
+    // Update the appropriate value based on active knob
+    if (activeKnob === "volume") {
+      const newVolume = Math.max(
+        0,
+        Math.min(100, knobStartValue + valueChange),
+      );
+      handleVolumeChange(newVolume);
+    } else if (activeKnob === "bass") {
+      const newBass = Math.max(0, Math.min(100, knobStartValue + valueChange));
+      setBass(newBass);
+    } else if (activeKnob === "treble") {
+      const newTreble = Math.max(
+        0,
+        Math.min(100, knobStartValue + valueChange),
+      );
+      setTreble(newTreble);
+    }
+  };
+
+  // Change theme
+  const cycleTheme = () => {
+    if (theme === "classic") setTheme("dark");
+    else if (theme === "dark") setTheme("retro");
+    else setTheme("classic");
+  };
+
+  // Fetch track from SoundCloud
+  const fetchSoundCloudTrack = async () => {
+    if (!soundCloudUrl.trim()) {
+      setError("Please enter a SoundCloud URL");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setDownloadUrl(null);
+
+    try {
+      // Validate URL format
+      let url: URL;
+      try {
+        url = new URL(soundCloudUrl);
+        if (!url.hostname.includes("soundcloud.com")) {
+          throw new Error("Not a valid SoundCloud URL");
+        }
+      } catch (e) {
+        throw new Error("Please enter a valid URL");
+      }
+
+      // Set the iframe URL for the SoundCloud widget
+      const widgetUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
+        soundCloudUrl,
+      )}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
+      setIframeUrl(widgetUrl);
+
+      // Fetch track info from SoundCloud oEmbed API
+      const oEmbedUrl = `https://soundcloud.com/oembed?url=${encodeURIComponent(
+        soundCloudUrl,
+      )}&format=json`;
+      const response = await fetch(oEmbedUrl);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch track information");
+      }
+
+      const data = await response.json();
+
+      // Extract track title and author from oEmbed response
+      setTrackInfo({
+        title: data.title || "Unknown Track",
+        artwork_url: null, // oEmbed doesn't provide artwork
+        user: {
+          username: data.author_name || "Unknown Artist",
+        },
+        duration: 0, // Will be set by the widget
+        permalink_url: soundCloudUrl,
+      });
+
+      // Set download URL
+      setDownloadUrl(soundCloudUrl);
+
+      // Reset playback state
+      setIsPlaying(false);
+      setCurrentTime(0);
+    } catch (err) {
+      console.error(err);
+      setError(err instanceof Error ? err.message : "Failed to load track");
+      setTrackInfo(null);
+      setIframeUrl(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle download with Python backend
+  const handleDownload = () => {
+    if (downloadUrl) {
+      window.open(downloadUrl, "_blank");
+    }
+  };
+
+  // Fallback download (open in SoundCloud)
+  const handleOpenInSoundCloud = () => {
+    if (downloadUrl) {
+      window.open(downloadUrl, "_blank");
+    }
+  };
+
+  return (
+    <>
+      <div className={`player-wrapper ${theme}`}>
+        {isInitializing ? (
+          <div className="initializing-overlay">
+            <div className="loading-spinner large" />
+          </div>
+        ) : null}
+        <div className="music-player-container">
+          {/* Metallic frame with texture */}
+          <div className="metallic-texture" />
+
+          <div className="player-body">
+            {/* Top screws for realistic hardware look */}
+            <div className="screw top-left" />
+            <div className="screw top-right" />
+
+            {/* SoundCloud URL input */}
+            <div className="soundcloud-input">
+              <div className="input-container">
+                <input
+                  type="text"
+                  value={soundCloudUrl}
+                  onChange={(e) => setSoundCloudUrl(e.target.value)}
+                  placeholder="Enter SoundCloud URL"
+                  className="url-input"
+                />
+                <button
+                  onClick={fetchSoundCloudTrack}
+                  disabled={isLoading}
+                  className="load-button"
+                >
+                  {isLoading ? (
+                    <div className="loading-spinner" />
+                  ) : (
+                    <>
+                      <Search className="search-icon" />
+                      <span>Load Track</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              {error && <div className="error-message">{error}</div>}
+            </div>
+
+            {/* Theme switcher */}
+            <button
+              onClick={cycleTheme}
+              className="theme-switcher"
+              aria-label="Change theme"
+            >
+              {theme === "classic" ? (
+                <Moon className="theme-icon" />
+              ) : theme === "dark" ? (
+                <Palette className="theme-icon" />
+              ) : (
+                <Sun className="theme-icon" />
+              )}
+            </button>
+
+            {/* Hidden SoundCloud iframe */}
+            {iframeUrl && (
+              <iframe
+                ref={iframeRef}
+                width="100%"
+                height="0"
+                scrolling="no"
+                frameBorder="no"
+                allow="autoplay"
+                src={iframeUrl}
+                className="hidden-iframe"
+              />
+            )}
+
+            {/* Digital display */}
+            <div className="display-panel">
+              <div className="digital-display">
+                <div className="display-header">
+                  <div className="display-label">NOW PLAYING</div>
+                  <div className="display-status">
+                    {isPlaying ? "PLAYING" : "PAUSED"}
+                  </div>
+                </div>
+                <div className="track-title">
+                  {trackInfo ? trackInfo.title : "No Track Loaded"}
+                </div>
+                <div className="track-artist">
+                  {trackInfo
+                    ? trackInfo.user.username
+                    : "Load a SoundCloud track to begin"}
+                </div>
+                <div className="time-display">
+                  <div>{formatTime(currentTime)}</div>
+                  <div>{formatTime(duration)}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Progress slider */}
+            <div className="progress-container">
+              <input
+                ref={progressRef}
+                type="range"
+                min="0"
+                max={duration || 100}
+                value={currentTime}
+                onChange={handleProgressChange}
+                onMouseDown={handleProgressDragStart}
+                onMouseUp={handleProgressDragEnd}
+                onTouchStart={handleProgressDragStart}
+                onTouchEnd={handleProgressDragEnd}
+                disabled={!trackInfo}
+                className="progress-slider"
+                style={{
+                  backgroundSize: `${duration ? (currentTime / duration) * 100 : 0
+                    }% 100%`,
+                }}
+              />
+            </div>
+
+            {/* Control buttons */}
+            <div className="controls-panel">
+              <button
+                className="control-button shuffle-button"
+                disabled={!trackInfo}
+              >
+                <Shuffle className="button-icon" />
+              </button>
+
+              <button
+                className="control-button prev-button"
+                disabled={!trackInfo}
+              >
+                <SkipBack className="button-icon" />
+              </button>
+
+              <button
+                onClick={togglePlay}
+                disabled={!trackInfo}
+                className="play-button"
+              >
+                {isPlaying ? (
+                  <Pause className="play-icon" />
+                ) : (
+                  <Play className="play-icon play-offset" />
+                )}
+              </button>
+
+              <button
+                className="control-button next-button"
+                disabled={!trackInfo}
+              >
+                <SkipForward className="button-icon" />
+              </button>
+
+              <button
+                onClick={handleOpenInSoundCloud}
+                disabled={!downloadUrl || isDownloading}
+                className="control-button download-button"
+                title="Open in SoundCloud"
+              >
+                {isDownloading ? (
+                  <div className="loading-spinner small" />
+                ) : (
+                  <Download className="button-icon" />
+                )}
+              </button>
+            </div>
+
+            {/* Python download button */}
+            {downloadUrl && (
+              <div className="download-container">
+                <button
+                  onClick={handleDownload}
+                  className="python-download-button"
+                >
+                  Open in SoundCloud
+                </button>
+                <div className="download-hint">
+                  To download, open in SoundCloud and use the download button
+                  there if available
+                </div>
+              </div>
+            )}
+
+            {/* Knobs and sliders panel */}
+            <div className="knobs-panel">
+              {/* Volume knob */}
+              <div className="knob-container">
+                <div className="knob-label">VOLUME</div>
+                <div
+                  ref={volumeKnobRef}
+                  className={`knob volume-knob ${activeKnob === "volume" ? "active" : ""
+                    }`}
+                  onMouseDown={(e) => handleKnobDown("volume", e)}
+                  onTouchStart={(e) => handleKnobDown("volume", e)}
+                >
+                  <div
+                    className="knob-indicator"
+                    style={{
+                      transform: `translateX(-50%) rotate(${volume * 2.7}deg)`,
+                    }}
+                  />
+                  <div className="knob-center" />
+                  <div className="knob-value-display">{volume}%</div>
+                </div>
+                <div className="knob-value">{volume}%</div>
+                <div className="knob-touch-hint">Drag up/down to adjust</div>
+              </div>
+
+              {/* Bass knob */}
+              <div className="knob-container">
+                <div className="knob-label">BASS</div>
+                <div
+                  ref={bassKnobRef}
+                  className={`knob bass-knob ${activeKnob === "bass" ? "active" : ""
+                    }`}
+                  onMouseDown={(e) => handleKnobDown("bass", e)}
+                  onTouchStart={(e) => handleKnobDown("bass", e)}
+                >
+                  <div
+                    className="knob-indicator"
+                    style={{
+                      transform: `translateX(-50%) rotate(${bass * 2.7}deg)`,
+                    }}
+                  />
+                  <div className="knob-center" />
+                  <div className="knob-value-display">{bass}%</div>
+                </div>
+                <div className="knob-value">{bass}%</div>
+                <div className="knob-touch-hint">Drag up/down to adjust</div>
+              </div>
+
+              {/* Treble knob */}
+              <div className="knob-container">
+                <div className="knob-label">TREBLE</div>
+                <div
+                  ref={trebleKnobRef}
+                  className={`knob treble-knob ${activeKnob === "treble" ? "active" : ""
+                    }`}
+                  onMouseDown={(e) => handleKnobDown("treble", e)}
+                  onTouchStart={(e) => handleKnobDown("treble", e)}
+                >
+                  <div
+                    className="knob-indicator"
+                    style={{
+                      transform: `translateX(-50%) rotate(${treble * 2.7}deg)`,
+                    }}
+                  />
+                  <div className="knob-center" />
+                  <div className="knob-value-display">{treble}%</div>
+                </div>
+                <div className="knob-value">{treble}%</div>
+                <div className="knob-touch-hint">Drag up/down to adjust</div>
+              </div>
+            </div>
+
+            {/* Bottom screws for realistic hardware look */}
+            <div className="screw bottom-left" />
+            <div className="screw bottom-right" />
+          </div>
+        </div>
+      </div>
+
+      {/* Component-scoped styling */}
+      <style jsx>{`
         /* Base styles for all themes */
         .player-wrapper {
           display: flex;
@@ -1251,9 +1247,7 @@ export default function MusicPlayer() {
         }
 
         /* Classic Theme (Default) */
-        .classic {
-          background: linear-gradient(to bottom right, #1a1a1a, #000000);
-        }
+        
 
         .classic .player-body {
           background: linear-gradient(to bottom, #4a4a4a, #2a2a2a);
@@ -1415,9 +1409,6 @@ export default function MusicPlayer() {
         }
 
         /* Dark Theme */
-        .dark {
-          background: linear-gradient(to bottom right, #000000, #0a0a0a);
-        }
 
         .dark .player-body {
           background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
@@ -1579,9 +1570,7 @@ export default function MusicPlayer() {
         }
 
         /* Retro Theme */
-        .retro {
-          background: linear-gradient(to bottom right, #8b4513, #654321);
-        }
+
 
         .retro .player-body {
           background: linear-gradient(to bottom, #deb887, #cd853f);
@@ -1788,6 +1777,6 @@ export default function MusicPlayer() {
           border-top-color: #fff;
         }
       `}</style>
-		</>
-	);
+    </>
+  );
 }

@@ -12,6 +12,7 @@ import Experience from "@/app/components/Main/Experience"
 import About from "./components/About"
 import Head from "next/head"
 import Script from "next/script"
+import Skills from "./components/Main/Skills"
 
 export default function Home() {
 	const [isLoading, setIsLoading] = useState(true)
@@ -55,13 +56,23 @@ export default function Home() {
 					<AnimatePresence mode="wait">{isLoading && <Preloader />}</AnimatePresence>
 				</>
 				<div className="overflow-clip bg-gradient-to-tl from-white via-zinc-300/50 to-white dark:from-black dark:via-zinc-600/20 dark:to-black">
-					<Hero />
-					<div className="">
-						<About />
-						<Projects />
-						<Tools />
-						<Experience />
+					<div className="flex flex-col items-center">
+						<div className="">
+							<Hero />
+						</div>
+						<div className="relative z-10">
+							<About />
+						</div>
+						<div className="-mt-56 h-[1600px] mb-16 max-w-[800px]">
+							<div className="sticky top-24">
+
+								<Skills />
+							</div>
+						</div>
 					</div>
+					<Projects />
+					<Tools />
+					<Experience />
 				</div>
 			</div>
 			<Footer />
