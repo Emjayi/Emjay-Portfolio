@@ -6,7 +6,6 @@ export const projects = [
 		src: "kerpo.jpg",
 		images: [],
 		link: "https://kerpino.vercel.app/",
-		git_link: "https://github.com/emjayi/kerpino",
 		color: "#008b8b",
 	},
 	{
