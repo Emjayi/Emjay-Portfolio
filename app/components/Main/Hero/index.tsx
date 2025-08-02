@@ -12,7 +12,8 @@ const navigation = [
 	{ name: "Projects", href: "projects" },
 	{ name: "Experiences", href: "experiences" },
 	{ name: "Tools", href: "/tools" },
-	{ name: "About", href: "about" }, // Added About link to navigation
+	{ name: "About", href: "about" },
+	{ name: "Blog", href: "/blog" },
 	{ name: "Contact", href: "contacts" },
 ]
 

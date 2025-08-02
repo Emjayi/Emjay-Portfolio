@@ -77,7 +77,7 @@ export default function TextReveal({ text, shouldAnimate, isActive, index, shoul
 
   return (
     <motion.div
-      className="flex items-center justify-center font-sans p-4"
+      className="flex items-center justify-start font-sans p-4"
       animate={{
         y: index * -20,
         opacity: hasAnimated ? 1 : 0,
@@ -91,12 +91,12 @@ export default function TextReveal({ text, shouldAnimate, isActive, index, shoul
         {hasAnimated && !shouldFade && (
           <motion.div
             key="text-reveal"
-            style={{ display: "flex", flexWrap: "wrap", justifyContent: 'center' }}
+            style={{ display: "flex", flexWrap: "wrap", justifyContent: 'start' }}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="text-lg font-bold text-center mask-r-from-0.5 max-w-5xl leading-relaxed"
+            className="text-xl font-bold text-start mask-r-from-0.5 max-w-5xl leading-relaxed"
           >
             {isAnimating ? (
               // Animated version (first time)
@@ -111,7 +111,7 @@ export default function TextReveal({ text, shouldAnimate, isActive, index, shoul
               ))
             ) : (
               // Simple version (after first animation)
-              <div className="text-lg font-bold text-center max-w-5xl leading-relaxed">
+              <div className="text-xl font-bold text-start max-w-5xl leading-relaxed">
                 {text}
               </div>
             )}

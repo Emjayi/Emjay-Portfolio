@@ -32,14 +32,16 @@ export default function Page({ params }: PageProps) {
 	return (
 		<div className="space-y-8">
 			{/* Back to Blog Button */}
-			<div className="flex justify-between items-center">
-				<Link href="/blog">
-					<Button variant="ghost" className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200">
-						<ArrowLeft className="h-4 w-4" />
-						Back to Blog
-					</Button>
-				</Link>
-				<ThemeSwitcher />
+			<div className="sticky top-0 bg-gradient-to-b -mt-8 dark:from-black from-white to-transparent from-80% pt-8 self-start">
+				<div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-700 pr-4 py-2 flex justify-between items-center">
+					<Link href="/blog">
+						<Button variant="ghost" className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200">
+							<ArrowLeft className="h-4 w-4" />
+							Back to Blog
+						</Button>
+					</Link>
+					<ThemeSwitcher />
+				</div>
 			</div>
 
 			{/* Post Header */}

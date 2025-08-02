@@ -5,7 +5,7 @@ date: "2024-01-25"
 author: "Emjay Sepahi"
 category: "Design"
 tags: ["Design", "UI/UX", "Visual Design", "Typography", "Color Theory"]
-image: "/products/3.jpg"
+image: "/public/products/3.jpg"
 ---
 
 # Essential Design Principles for Web Developers

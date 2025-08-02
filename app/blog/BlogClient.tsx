@@ -9,6 +9,7 @@ import { ThemeSwitcher } from "@/app/components/theme-switcher";
 import Link from "next/link";
 import { useState, useMemo } from "react";
 import { BlogPost } from "@/lib/blog-utils";
+import Image from "next/image";
 
 interface BlogClientProps {
     posts: BlogPost[];
@@ -48,37 +49,40 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800">
-            {/* Header with Theme Switcher */}
-            <div className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
-                <div className="max-w-7xl mx-auto px-4 py-4">
-                    <div className="flex justify-between items-center">
-                        <Link href="/" className="text-xl font-bold text-zinc-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                            Emjay Sepahi
-                        </Link>
-                        <ThemeSwitcher />
-                    </div>
-                </div>
-            </div>
+            <div>
 
-            {/* Hero Section */}
-            <div className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
-                <div className="max-w-7xl mx-auto px-4 py-12">
-                    <div className="text-center space-y-4">
-                        <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white">
-                            Blog
-                        </h1>
-                        <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                            Thoughts, tutorials, and insights about web development, design, and programming.
-                        </p>
-                        <div className="flex justify-center">
-                            <Badge variant="outline" className="text-sm">
-                                {filteredPosts.length} Articles
-                            </Badge>
+                {/* Header with Theme Switcher */}
+                <div className="bg-white sticky top-0 self-start dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
+                    <div className="max-w-7xl mx-auto px-4 py-4">
+                        <div className="flex justify-between items-center">
+                            <Link href="/" className="text-xl font-bold text-zinc-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                Emjay Sepahi
+                            </Link>
+                            <ThemeSwitcher />
                         </div>
                     </div>
                 </div>
-            </div>
 
+                {/* Hero Section */}
+                <div className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
+                    <div className="max-w-7xl mx-auto px-4 py-12">
+                        <div className="text-center space-y-4">
+                            <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white">
+                                Blog
+                            </h1>
+                            <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+                                My thoughts on anything I like.
+                            </p>
+                            <div className="flex justify-center">
+                                <Badge variant="outline" className="text-sm">
+                                    {filteredPosts.length} Articles
+                                </Badge>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 py-12">
                 <div className="flex flex-col lg:flex-row gap-8">
@@ -182,11 +186,18 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                                 {filteredPosts.map((post) => (
                                     <article key={post.slug} className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-700 overflow-hidden hover:shadow-md transition-shadow">
                                         <div className="aspect-video relative overflow-hidden">
-                                            <img
-                                                src={post.image}
-                                                alt={post.title}
-                                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                            />
+                                            <Link
+                                                href={`/blog/${post.slug}`}
+                                                className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                            >
+                                                <Image
+                                                    src={post.image}
+                                                    alt={post.title}
+                                                    width={800}
+                                                    height={600}
+                                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                                />
+                                            </Link>
                                             <div className="absolute top-4 left-4">
                                                 <Badge variant="secondary" className="bg-white/90 dark:bg-zinc-800/90 text-zinc-700 dark:text-zinc-300">
                                                     {post.category}
@@ -205,12 +216,12 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                                                 </div>
                                             </div>
                                             <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3 line-clamp-2">
-                                                <a
+                                                <Link
                                                     href={`/blog/${post.slug}`}
                                                     className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                                 >
                                                     {post.title}
-                                                </a>
+                                                </Link>
                                             </h2>
                                             <p className="text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-3">
                                                 {post.description}

@@ -19,6 +19,12 @@ const exp = [
 		endDate: "May 2024",
 		jobTitle: "Senior Front-End Developer",
 	},
+	{
+		title: "Kerpino",
+		startDate: "Jan 2025",
+		endDate: "Now",
+		jobTitle: "Full-Stack Developer",
+	},
 ];
 const std = [
 	{

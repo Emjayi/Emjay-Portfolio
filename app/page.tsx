@@ -65,8 +65,8 @@ export default function Home() {
 						</div>
 						<div className="-mt-56 h-[1600px] mb-16 max-w-[800px]">
 							<div className="sticky top-24">
-								<h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight text-center">
-									So here you can see my skills...
+								<h2 className="text-xl font-bold text-start max-w-5xl leading-relaxed">
+									Some of my skills...
 								</h2>
 								<Skills />
 							</div>

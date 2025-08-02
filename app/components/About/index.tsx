@@ -98,7 +98,7 @@ const About = () => {
 				<div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-12 transition-opacity duration-300">
 					{/* Always show paragraphs if they've been encountered */}
 					{paragraphSections.length > 0 && (
-						<div className="w-full max-w-4xl space-y-12">
+						<div className="w-full max-w-4xl space-y-4">
 							{paragraphSections.map((section, index) => {
 								const sectionKey = `${section.startPosition}-${section.endPosition}`
 								const isCurrentlyActive = scrollPosition >= section.startPosition && scrollPosition < section.endPosition
