@@ -11,4 +11,4 @@ content:
     - {name: author, label: Author, type: string}
     - {name: category, label: Category, type: string}
     - {name: tags, label: Tags, type: string}
-    - {name: tags, label: Tags, type: image}
+    - {name: image, label: Image, type: image}
