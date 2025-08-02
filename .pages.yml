@@ -15,7 +15,4 @@ content:
         name: image,
         label: Image,
         type: image,
-        options:{
-            path: public,
-          }
     }
