@@ -2,60 +2,50 @@
 
 import { useRef, useState, useEffect } from "react"
 import Skills from "../Main/Skills"
+import TextReveal from "@/components/ui/textreveal"
 
 const About = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [scrollPosition, setScrollPosition] = useState(0)
+	const [encounteredSections, setEncounteredSections] = useState<Set<string>>(new Set())
 
 	// Define sections with their scroll position ranges
 	const sections = [
 		{
-			type: "title",
-			content: "About Me",
-			startPosition: 0,
-			endPosition: 0.06,
+			type: "paragraph",
+			content:
+				"I'm Mohammad Javad, a 25-year-old web developer with over 5 years of experience in the tech industry.",
+			startPosition: 0.02,
+			endPosition: 0.10,
 		},
 		{
 			type: "paragraph",
 			content:
-				"I'm Mohammad Javad, a Full-Stack Web Developer with a passion for design, computers, and solving problems.",
-			startPosition: 0.06,
-			endPosition: 0.12,
-		},
-		{
-			type: "paragraph",
-			content:
-				"My journey began with WordPress web design, where I first discovered the joy of building things that live on the internet.",
-			startPosition: 0.12,
+				"I began my journey with WordPress and Elementor, gradually moving into front-end development by learning CSS, HTML, and JavaScript.",
+			startPosition: 0.10,
 			endPosition: 0.18,
 		},
 		{
 			type: "paragraph",
 			content:
-				"From there, I dove headfirst into the world of CSS and JavaScript, turning static pages into interactive experiences.",
+				"As I deepened my skills through self-study and online courses, I transitioned into modern frameworks like React and eventually specialized in Next.js.",
 			startPosition: 0.16,
 			endPosition: 0.24,
 		},
 		{
 			type: "paragraph",
 			content:
-				"These days, I'm fully immersed in the ever-evolving universe of web development, working hands-on with cutting-edge technologies to bring ideas to life.",
+				"For the past 3 years, I’ve been working professionally with Next.js, building scalable, high-performance applications while continuously expanding my knowledge of modern web technologies and tools.",
 			startPosition: 0.24,
 			endPosition: 0.30,
 		},
 		{
 			type: "paragraph",
 			content:
-				"For me, coding isn't just about writing lines of code — it's about crafting something meaningful and, if I'm lucky, a little magical.",
+				"I’m a dedicated lifelong learner, always seeking better solutions, cleaner code, and more efficient workflows.",
 			startPosition: 0.30,
 			endPosition: 0.36,
-		},
-		{
-			type: "skills",
-			content: "So here you can see my skills...",
-			startPosition: 0.36,
-			endPosition: 0.56,
-		},
+		}
 	]
 
 	// Handle scroll to update scroll position
@@ -71,10 +61,34 @@ const About = () => {
 		return () => window.removeEventListener("scroll", handleScroll)
 	}, [])
 
-	// Find the active section based on scroll position
-	const activeSection = sections.find(
-		(section) => scrollPosition >= section.startPosition && scrollPosition < section.endPosition,
+	// Track encountered sections
+	useEffect(() => {
+		const newEncounteredSections = new Set(encounteredSections)
+		let hasChanges = false
+
+		sections.forEach(section => {
+			if (scrollPosition >= section.startPosition && scrollPosition < section.endPosition) {
+				const sectionKey = `${section.startPosition}-${section.endPosition}`
+				if (!newEncounteredSections.has(sectionKey)) {
+					newEncounteredSections.add(sectionKey)
+					hasChanges = true
+				}
+			}
+		})
+
+		if (hasChanges) {
+			setEncounteredSections(newEncounteredSections)
+		}
+	}, [scrollPosition, encounteredSections])
+
+	// Get all paragraph sections that have been encountered
+	const paragraphSections = sections.filter(section =>
+		section.type === "paragraph" &&
+		encounteredSections.has(`${section.startPosition}-${section.endPosition}`)
 	)
+
+	// Check if we're in skills section
+	const isInSkillsSection = scrollPosition >= 0.34
 
 	return (
 		<div ref={containerRef} className="md:h-[800vh]" id="about">
@@ -82,29 +96,28 @@ const About = () => {
 			<div className="md:sticky md:top-0 h-screen w-full flex items-center justify-center">
 				{/* Content that changes based on scroll position */}
 				<div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-12 transition-opacity duration-300">
-					{activeSection && (
-						<>
-							{activeSection.type === "title" && (
-								<h1 className="text-3xl md:text-4xl font-black tracking-tight">{activeSection.content}</h1>
-							)}
+					{/* Always show paragraphs if they've been encountered */}
+					{paragraphSections.length > 0 && (
+						<div className="w-full max-w-4xl space-y-12">
+							{paragraphSections.map((section, index) => {
+								const sectionKey = `${section.startPosition}-${section.endPosition}`
+								const isCurrentlyActive = scrollPosition >= section.startPosition && scrollPosition < section.endPosition
 
-							{activeSection.type === "paragraph" && (
-								<p className="text-2xl md:text-4xl font-bold max-w-4xl">{activeSection.content}</p>
-							)}
-
-							{activeSection.type === "skills" && (
-								<div className="w-full max-w-4xl">
-									<h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight text-center">
-										{activeSection.content}
-									</h2>
-								</div>
-							)}
-						</>
+								return (
+									<TextReveal
+										key={sectionKey}
+										text={section.content}
+										shouldAnimate={isCurrentlyActive}
+										isActive={isCurrentlyActive}
+										index={index}
+										shouldFade={isInSkillsSection}
+									/>
+								)
+							})}
+						</div>
 					)}
 				</div>
 			</div>
-
-
 		</div>
 	)
 }
