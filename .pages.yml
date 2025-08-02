@@ -10,4 +10,5 @@ content:
     - {name: date, label: Date, type: date}
     - {name: author, label: Author, type: string}
     - {name: category, label: Category, type: string}
-    - {name: tags, label: Tags, type: array}
+    - {name: tags, label: Tags, type: string}
+    - {name: tags, label: Tags, type: image}
