@@ -1,82 +1,182 @@
+// Posts collection - Blog posts
+export const posts = [
+	{
+		title: "Design Principles for Modern Web Development",
+		description: "Exploring fundamental design principles that every web developer should understand and apply in their projects.",
+		date: "2024-01-15",
+		author: "Emjay Sepahi",
+		category: "Design",
+		tags: "design, web-development, principles, ui-ux",
+		image: "/images/design-principles.jpg",
+		body: "Design principles are the foundation of creating effective and user-friendly web applications...",
+		slug: "design-principles"
+	},
+	{
+		title: "Hello World: Getting Started with Web Development",
+		description: "A beginner's guide to starting your journey in web development with practical examples.",
+		date: "2024-01-10",
+		author: "Emjay Sepahi",
+		category: "Tutorial",
+		tags: "beginner, web-development, tutorial, javascript",
+		image: "/images/hello-world.jpg",
+		body: "Every developer's journey begins with a simple 'Hello World' program...",
+		slug: "hello-world"
+	},
+	{
+		title: "React Basics: Understanding Components and Props",
+		description: "Learn the fundamentals of React components, props, and state management for building interactive user interfaces.",
+		date: "2024-01-05",
+		author: "Emjay Sepahi",
+		category: "React",
+		tags: "react, components, props, javascript, frontend",
+		image: "/images/react-basics.jpg",
+		body: "React has revolutionized the way we build user interfaces...",
+		slug: "react-basics"
+	}
+];
+
+// Projects collection - Main portfolio projects
 export const projects = [
 	{
 		title: "Kerpino MVP",
-		description:
-			"Immersive Unreal Pixel Streaming Platform: A Cutting-Edge Virtual Showroom for Interactive Interior Design Experiences. Plan floor image to 3D interactive unrela engine world.",
+		description: "Immersive Unreal Pixel Streaming Platform: A Cutting-Edge Virtual Showroom for Interactive Interior Design Experiences. Plan floor image to 3D interactive unrela engine world.",
+		date: "2024-01-20",
+		author: "Emjay Sepahi",
+		category: "3D Platform",
+		tags: "unreal-engine, 3d, streaming, interior-design, virtual-showroom",
+		image: "/images/kerpo.jpg",
+		body: "Kerpino MVP represents a breakthrough in virtual interior design experiences...",
 		src: "kerpo.jpg",
 		images: [],
 		link: "https://kerpino.vercel.app/",
 		color: "#008b8b",
+		git_link: null
 	},
 	{
 		title: "Baroque",
-		description:
-			"Baroque Company was founded in 2010 by Engineer Hasan Roshanayi Moghadam, after his 1982 graduation from Ferdowsi University of Mashhad (Civil Engineering). With years of experience in major construction projects, the company was established to incorporate modern techniques and a new generation of specialists.",
+		description: "Baroque Company was founded in 2010 by Engineer Hasan Roshanayi Moghadam, after his 1982 graduation from Ferdowsi University of Mashhad (Civil Engineering). With years of experience in major construction projects, the company was established to incorporate modern techniques and a new generation of specialists.",
+		date: "2024-01-18",
+		author: "Emjay Sepahi",
+		category: "Corporate Website",
+		tags: "construction, corporate, nextjs, modern-design",
+		image: "/images/baroque.png",
+		body: "Baroque represents a modern approach to corporate website design...",
 		src: "baroque.png",
 		images: [],
 		link: "https://baroque-seven.vercel.app/",
 		git_link: "https://github.com/Emjayi/baroque-next",
-		color: "#96751e",
+		color: "#96751e"
 	},
 	{
 		title: "Alireza's Portfolio",
-
-		description:
-			"Alireza Refaei is a skilled industrial, commercial, and product photographer, specializing in capturing high-quality images that highlight the essence and functionality of products and projects.",
+		description: "Alireza Refaei is a skilled industrial, commercial, and product photographer, specializing in capturing high-quality images that highlight the essence and functionality of products and projects.",
+		date: "2024-01-15",
+		author: "Emjay Sepahi",
+		category: "Photography Portfolio",
+		tags: "photography, portfolio, industrial, commercial, product",
+		image: "/images/alireza.png",
+		body: "A showcase of Alireza's exceptional photography skills...",
 		src: "alireza.png",
 		link: "https://alirezarefaei.com/",
 		git_link: "https://github.com/Emjayi/refaee-photography",
-		color: "#225560",
+		color: "#225560"
 	},
 	{
 		title: "My Portfolio",
-		description:
-			"Let's keep it simple, You should have known me by now. A web developer and designer who loves to create beautiful and functional websites that are easy to use and navigate. I'm always looking for new challenges and opportunities to learn and grow.",
+		description: "Let's keep it simple, You should have known me by now. A web developer and designer who loves to create beautiful and functional websites that are easy to use and navigate. I'm always looking for new challenges and opportunities to learn and grow.",
+		date: "2024-01-12",
+		author: "Emjay Sepahi",
+		category: "Personal Portfolio",
+		tags: "portfolio, personal, web-development, design",
+		image: "/images/emjay.png",
+		body: "My personal portfolio showcasing my skills and projects...",
 		src: "emjay.png",
 		link: "https://emjaysepahi.com/",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio",
-		color: "#225560",
+		color: "#225560"
 	},
 	{
 		title: "Takfazkala",
-		description:
-			"Takfazakala offers high-quality electrical equipment for professionals and DIY enthusiasts. From essential components to advanced tools, they provide reliable, industry-standard products to power your projects safely and efficiently.",
+		description: "Takfazakala offers high-quality electrical equipment for professionals and DIY enthusiasts. From essential components to advanced tools, they provide reliable, industry-standard products to power your projects safely and efficiently.",
+		date: "2024-01-10",
+		author: "Emjay Sepahi",
+		category: "E-commerce",
+		tags: "electrical, e-commerce, equipment, tools",
+		image: "/images/takfazkala.png",
+		body: "An e-commerce platform for electrical equipment and tools...",
 		src: "takfazkala.png",
 		link: "https://takfazkala.com/",
 		color: "#692424",
+		git_link: null
 	},
 	{
 		title: "Nahid's Portfolio",
-		description:
-			"Though she views photography as a medium for storytelling, Nahid's images don’t insist on a narrative. Both crisp and ethereal, they’re encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
+		description: "Though she views photography as a medium for storytelling, Nahid's images don't insist on a narrative. Both crisp and ethereal, they're encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
+		date: "2024-01-08",
+		author: "Emjay Sepahi",
+		category: "Photography Portfolio",
+		tags: "photography, portfolio, storytelling, artistic",
+		image: "/images/nahid.png",
+		body: "Nahid's artistic photography portfolio showcasing her unique vision...",
 		src: "nahid.png",
 		link: "https://nahidshahriarpour.com/",
 		git_link: "https://github.com/Emjayi/nahid-photography",
-		color: "#220060",
+		color: "#220060"
 	},
 	{
 		title: "IML Technology",
-		description:
-			"Pooyesh Abzar Pars Company has 16 years of experience in the field of designing and manufacturing plastic injection molds, plastic injection machines and automation of plastic parts production. (Still in Progress)",
+		description: "Pooyesh Abzar Pars Company has 16 years of experience in the field of designing and manufacturing plastic injection molds, plastic injection machines and automation of plastic parts production. (Still in Progress)",
+		date: "2024-01-05",
+		author: "Emjay Sepahi",
+		category: "Manufacturing",
+		tags: "manufacturing, plastic-injection, automation, industrial",
+		image: "/images/iml.png",
+		body: "A comprehensive platform for IML Technology's manufacturing services...",
 		src: "iml.png",
 		git_link: "https://github.com/Emjayi/iml-next",
 		color: "#631750",
-	},
+		link: null
+	}
 ];
+
+// Other Projects collection - Additional projects
 export const other_projects = [
 	{
 		title: "Morph Architects",
+		description: "Architectural design and visualization platform showcasing innovative building concepts and sustainable design solutions.",
+		date: "2024-01-03",
+		author: "Emjay Sepahi",
+		category: "Architecture",
+		tags: "architecture, design, visualization, sustainable",
+		image: "/images/morph.jpg",
+		body: "Morph Architects represents cutting-edge architectural design...",
 		src: "morph.jpg",
 		images: [],
 		link: "https://morph-architects.com/",
+		git_link: null
 	},
 	{
 		title: "PooladSazeh",
+		description: "Construction and building services company website with modern design and comprehensive service information.",
+		date: "2024-01-01",
+		author: "Emjay Sepahi",
+		category: "Construction",
+		tags: "construction, building, services, corporate",
+		image: "/images/poolad.png",
+		body: "PooladSazeh provides comprehensive construction services...",
 		src: "poolad.png",
 		link: "https://poolad-sazeh.com/",
+		git_link: null
 	},
 	{
 		title: "SoundCloud Player / Downloader",
+		description: "A web-based application for playing and downloading SoundCloud tracks with enhanced user experience.",
+		date: "2023-12-28",
+		author: "Emjay Sepahi",
+		category: "Music App",
+		tags: "soundcloud, music, player, downloader, web-app",
+		image: "/images/other/player.png",
+		body: "An innovative music player and downloader for SoundCloud...",
 		src: "other/player.png",
 		images: [],
 		link: "/projects/music-player",
@@ -84,134 +184,284 @@ export const other_projects = [
 	},
 	{
 		title: "Todo List",
+		description: "A feature-rich todo list application with task management, categories, and progress tracking.",
+		date: "2023-12-25",
+		author: "Emjay Sepahi",
+		category: "Productivity",
+		tags: "todo, productivity, task-management, web-app",
+		image: "/images/other/todo.png",
+		body: "A comprehensive todo list application for personal and professional use...",
 		src: "other/todo.png",
 		link: "/projects/todo-list",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/projects/(projects)/todo-list/page.tsx"
 	},
 	{
 		title: "Color Palette Generator",
+		description: "Interactive color palette generator with color theory principles and export functionality.",
+		date: "2023-12-22",
+		author: "Emjay Sepahi",
+		category: "Design Tool",
+		tags: "color, palette, generator, design, tool",
+		image: "/images/other/color.png",
+		body: "Create beautiful color palettes with our interactive generator...",
 		src: "other/color.png",
 		link: "/projects/color-palette",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/projects/(projects)/color-palette/page.tsx"
 	},
 	{
 		title: "Habit Tracker",
+		description: "Personal habit tracking application to build positive routines and achieve your goals.",
+		date: "2023-12-20",
+		author: "Emjay Sepahi",
+		category: "Productivity",
+		tags: "habit, tracker, productivity, goals, routine",
+		image: "/images/other/habit.png",
+		body: "Track your habits and build positive routines with our habit tracker...",
 		src: "other/habit.png",
 		link: "/projects/habit-tracker",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/tree/main/app/projects/(projects)/habit-tracker"
 	},
 	{
 		title: "Crypto Price Tracker",
+		description: "Real-time cryptocurrency price tracking with historical data and market analysis.",
+		date: "2023-12-18",
+		author: "Emjay Sepahi",
+		category: "Finance",
+		tags: "crypto, cryptocurrency, price-tracker, finance, real-time",
+		image: "/images/other/crypto.png",
+		body: "Stay updated with real-time cryptocurrency prices and market trends...",
 		src: "other/crypto.png",
 		link: "/projects/crypto-tracker",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/tree/main/app/projects/(projects)/crypto-tracker"
 	},
 	{
 		title: "Weather App",
+		description: "Weather application with current conditions, forecasts, and location-based weather information.",
+		date: "2023-12-15",
+		author: "Emjay Sepahi",
+		category: "Weather",
+		tags: "weather, forecast, location, api, web-app",
+		image: "/images/other/weather.png",
+		body: "Get accurate weather information for any location worldwide...",
 		src: "other/weather.png",
 		link: "/projects/weather",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/tree/main/app/projects/(projects)/weather"
-	},
-
+	}
 ];
 
-export const collabs = [
-
-]
-
+// Tools collection - Utility applications
 export const tools = [
-	// {
-	// 	name: "To-Do List",
-	// 	href: "projects/todo-list",
-	// 	git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/projects/(projects)/todo-list/page.tsx"
-	// },
 	{
+		title: "Calculator",
+		description: "Advanced calculator with scientific functions and mathematical operations.",
+		date: "2023-12-12",
+		author: "Emjay Sepahi",
+		category: "Utility",
+		tags: "calculator, math, scientific, utility",
+		image: "/images/tools/calculator.png",
+		body: "A comprehensive calculator for all your mathematical needs...",
 		name: "Calculator",
 		href: "tools/calculator",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/calculator/page.tsx"
 	},
 	{
+		title: "Password Generator",
+		description: "Secure password generator with customizable length and character types.",
+		date: "2023-12-10",
+		author: "Emjay Sepahi",
+		category: "Security",
+		tags: "password, generator, security, utility",
+		image: "/images/tools/password.png",
+		body: "Generate strong, secure passwords for your accounts...",
 		name: "Password Generator",
 		href: "tools/pass-gen",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/pass-gen/page.tsx"
 	},
-	// {
-	// 	name: "Palette Generator",
-	// 	href: "projects/color-palette",
-	// 	git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/projects/(projects)/color-palette/page.tsx"
-	// },
 	{
+		title: "Countdown Timer",
+		description: "Customizable countdown timer with multiple preset options and notifications.",
+		date: "2023-12-08",
+		author: "Emjay Sepahi",
+		category: "Productivity",
+		tags: "countdown, timer, productivity, utility",
+		image: "/images/tools/countdown.png",
+		body: "Set custom countdown timers for any occasion...",
 		name: "Countdown Timer",
 		href: "tools/countdown",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/countdown/page.tsx"
 	},
 	{
+		title: "Image Compressor",
+		description: "Online image compression tool to reduce file size while maintaining quality.",
+		date: "2023-12-06",
+		author: "Emjay Sepahi",
+		category: "Media",
+		tags: "image, compression, media, utility",
+		image: "/images/tools/compressor.png",
+		body: "Compress your images without losing quality...",
 		name: "Image Compressor",
 		href: "tools/img-compressor",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/img-compressor/page.tsx"
 	},
 	{
+		title: "String Splitter",
+		description: "Text string manipulation tool for splitting and processing text data.",
+		date: "2023-12-04",
+		author: "Emjay Sepahi",
+		category: "Text Processing",
+		tags: "string, splitter, text, processing, utility",
+		image: "/images/tools/splitter.png",
+		body: "Split and process text strings efficiently...",
 		name: "String splitter",
 		href: "tools/string-splitter",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/string-splitter/page.tsx"
 	},
 	{
+		title: "Random Quote Generator",
+		description: "Inspirational quote generator with categories and sharing capabilities.",
+		date: "2023-12-02",
+		author: "Emjay Sepahi",
+		category: "Inspiration",
+		tags: "quotes, inspiration, generator, motivation",
+		image: "/images/tools/quotes.png",
+		body: "Discover inspiring quotes from famous authors and thinkers...",
 		name: "Random Quote Generator",
 		href: "tools/quote-gen",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/quote-gen/page.tsx"
 	},
 	{
+		title: "Currency Converter",
+		description: "Real-time currency conversion with up-to-date exchange rates.",
+		date: "2023-11-30",
+		author: "Emjay Sepahi",
+		category: "Finance",
+		tags: "currency, converter, finance, exchange-rates",
+		image: "/images/tools/currency.png",
+		body: "Convert between different currencies with real-time rates...",
 		name: "Currency Converter",
 		href: "tools/cur-converter",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/cur-converter/page.tsx"
 	},
 	{
+		title: "Expense Tracker",
+		description: "Personal finance management tool for tracking expenses and budgeting.",
+		date: "2023-11-28",
+		author: "Emjay Sepahi",
+		category: "Finance",
+		tags: "expense, tracker, finance, budgeting, personal",
+		image: "/images/tools/expense.png",
+		body: "Track your expenses and manage your budget effectively...",
 		name: "Expense Tracker",
 		href: "tools/exp-tracker",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/exp-tracker/page.tsx"
 	},
 	{
+		title: "Markdown Previewer",
+		description: "Live markdown editor with real-time preview and syntax highlighting.",
+		date: "2023-11-26",
+		author: "Emjay Sepahi",
+		category: "Text Editor",
+		tags: "markdown, previewer, editor, text, live",
+		image: "/images/tools/markdown.png",
+		body: "Write and preview markdown content in real-time...",
 		name: "Markdown Previewer",
 		href: "tools/markdown-previewer",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/markdown-previewer/page.tsx"
 	},
 	{
+		title: "Pomodoro Timer",
+		description: "Productivity timer based on the Pomodoro Technique for focused work sessions.",
+		date: "2023-11-24",
+		author: "Emjay Sepahi",
+		category: "Productivity",
+		tags: "pomodoro, timer, productivity, focus, technique",
+		image: "/images/tools/pomodoro.png",
+		body: "Boost your productivity with the Pomodoro Technique...",
 		name: "Pomodoro Timer",
 		href: "tools/pomodoro",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/pomodoro/page.tsx"
 	},
 	{
+		title: "Color Picker",
+		description: "Advanced color picker with hex, RGB, and HSL color formats.",
+		date: "2023-11-22",
+		author: "Emjay Sepahi",
+		category: "Design",
+		tags: "color, picker, design, hex, rgb, hsl",
+		image: "/images/tools/color-picker.png",
+		body: "Pick and convert colors in multiple formats...",
 		name: "Color Picker",
 		href: "tools/color-picker",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/color-picker/page.tsx"
 	},
 	{
+		title: "JSON Formatter",
+		description: "JSON beautifier and formatter with syntax highlighting and validation.",
+		date: "2023-11-20",
+		author: "Emjay Sepahi",
+		category: "Development",
+		tags: "json, formatter, beautifier, development, syntax",
+		image: "/images/tools/json.png",
+		body: "Format and validate your JSON data with ease...",
 		name: "JSON Formatter",
 		href: "tools/json-formatter",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/json-formatter/page.tsx"
 	},
 	{
+		title: "QR Code Generator",
+		description: "QR code generator for URLs, text, and contact information.",
+		date: "2023-11-18",
+		author: "Emjay Sepahi",
+		category: "Utility",
+		tags: "qr-code, generator, utility, barcode",
+		image: "/images/tools/qr.png",
+		body: "Generate QR codes for any content or URL...",
 		name: "QR Code Generator",
 		href: "tools/qr-code-gen",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/qr-code-gen/page.tsx"
 	},
 	{
+		title: "Lorem Ipsum Generator",
+		description: "Lorem ipsum text generator with customizable length and paragraph options.",
+		date: "2023-11-16",
+		author: "Emjay Sepahi",
+		category: "Content",
+		tags: "lorem-ipsum, generator, content, placeholder, text",
+		image: "/images/tools/lorem.png",
+		body: "Generate placeholder text for your design projects...",
 		name: "Lorem Ipsum Generator",
 		href: "tools/lorem-ipsum-gen",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/lorem-ipsum-gen/page.tsx"
 	},
 	{
+		title: "Regular Expression Tester",
+		description: "Regex tester and debugger with real-time matching and explanation.",
+		date: "2023-11-14",
+		author: "Emjay Sepahi",
+		category: "Development",
+		tags: "regex, regular-expression, tester, development, pattern",
+		image: "/images/tools/regex.png",
+		body: "Test and debug your regular expressions with real-time feedback...",
 		name: "Regular Expression Tester",
 		href: "tools/regex-tester",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/regex-tester/page.tsx"
 	},
 	{
+		title: "CSS Gradient Generator",
+		description: "Interactive CSS gradient generator with color stops and direction controls.",
+		date: "2023-11-12",
+		author: "Emjay Sepahi",
+		category: "Design",
+		tags: "css, gradient, generator, design, colors",
+		image: "/images/tools/gradient.png",
+		body: "Create beautiful CSS gradients with our interactive generator...",
 		name: "CSS Gradient Generator",
 		href: "tools/css-gradient-gen",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio/blob/main/app/tools/css-gradient-gen/page.tsx"
-	},
+	}
 ];
 
+// Technology stack data
 export const tech = [
 	{
 		id: 1,
