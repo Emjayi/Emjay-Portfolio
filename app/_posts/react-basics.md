@@ -1,13 +1,13 @@
 ---
 title: "React Basics: Understanding Components and State"
-description: "Learn the fundamentals of React, including components, state management, and the virtual DOM."
-date: "2024-01-20"
-author: "Emjay Sepahi"
-category: "Programming"
-tags: ["React", "JavaScript", "Frontend", "Components", "State"]
-image: "/public/products/2.jpg"
+description: Learn the fundamentals of React, including components, state
+  management, and the virtual DOM.
+date: 2024-01-20
+author: Emjay Sepahi
+category: Programming
+tags: React,JavaScript,Frontend,Components,State
+image: /products/2.jpg
 ---
-
 # React Basics: Understanding Components and State
 
 React has revolutionized the way we build user interfaces on the web. In this post, we'll explore the core concepts that make React so powerful and popular among developers.
@@ -18,7 +18,7 @@ React is a JavaScript library for building user interfaces, particularly single-
 
 ## Core Concepts
 
-### 1. Components
+### 1\. Components
 
 Components are the building blocks of React applications. They are reusable pieces of UI that can contain their own logic and styling.
 
@@ -36,7 +36,7 @@ class Welcome extends React.Component {
 }
 ```
 
-### 2. Props
+### 2\. Props
 
 Props (properties) are how components receive data from their parent components. They are read-only and help make components reusable.
 
@@ -55,7 +55,7 @@ function UserCard(props) {
 <UserCard name="John Doe" email="john@example.com" role="Developer" />
 ```
 
-### 3. State
+### 3\. State
 
 State is the internal data of a component that can change over time. When state changes, React re-renders the component.
 
@@ -83,10 +83,10 @@ function Counter() {
 
 React uses a Virtual DOM to optimize rendering performance. Here's how it works:
 
-1. **State Change**: When component state changes
-2. **Virtual DOM Update**: React updates the Virtual DOM
-3. **Diffing**: React compares Virtual DOM with actual DOM
-4. **Minimal Updates**: Only necessary changes are applied to the real DOM
+1.  **State Change**: When component state changes
+2.  **Virtual DOM Update**: React updates the Virtual DOM
+3.  **Diffing**: React compares Virtual DOM with actual DOM
+4.  **Minimal Updates**: Only necessary changes are applied to the real DOM
 
 ## Hooks
 
@@ -165,23 +165,23 @@ function UserProfile({ userId }) {
 
 ## Best Practices
 
-### 1. Component Structure
+### 1\. Component Structure
 
-- Keep components small and focused
-- Use descriptive names
-- Separate concerns (UI, logic, data)
+*   Keep components small and focused
+*   Use descriptive names
+*   Separate concerns (UI, logic, data)
 
-### 2. State Management
+### 2\. State Management
 
-- Lift state up when needed
-- Use local state for component-specific data
-- Consider context or Redux for global state
+*   Lift state up when needed
+*   Use local state for component-specific data
+*   Consider context or Redux for global state
 
-### 3. Performance
+### 3\. Performance
 
-- Use React.memo for expensive components
-- Implement proper key props in lists
-- Avoid unnecessary re-renders
+*   Use React.memo for expensive components
+*   Implement proper key props in lists
+*   Avoid unnecessary re-renders
 
 ## Common Patterns
 
@@ -238,15 +238,15 @@ npm run dev
 
 Once you're comfortable with the basics:
 
-1. **Learn about Context API** for state management
-2. **Explore React Router** for navigation
-3. **Study custom hooks** for reusable logic
-4. **Practice with real projects** to solidify concepts
+1.  **Learn about Context API** for state management
+2.  **Explore React Router** for navigation
+3.  **Study custom hooks** for reusable logic
+4.  **Practice with real projects** to solidify concepts
 
 ## Conclusion
 
 React's component-based architecture and powerful features make it an excellent choice for building modern web applications. Start with these fundamentals, practice regularly, and you'll be building amazing user interfaces in no time!
 
----
+* * *
 
-*Ready to dive deeper into React? Check out our advanced React patterns post coming soon!* 
+_Ready to dive deeper into React? Check out our advanced React patterns post coming soon!_
