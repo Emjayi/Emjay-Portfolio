@@ -96,7 +96,7 @@ export default function TextReveal({ text, shouldAnimate, isActive, index, shoul
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="text-xl font-bold text-start mask-r-from-0.5 max-w-5xl leading-relaxed"
+            className="text-md font-bold text-start mask-r-from-0.5 max-w-5xl leading-relaxed"
           >
             {isAnimating ? (
               // Animated version (first time)
@@ -104,14 +104,14 @@ export default function TextReveal({ text, shouldAnimate, isActive, index, shoul
                 <motion.span
                   key={index}
                   variants={childVariants as any}
-                  style={{ marginRight: "12px", marginTop: "10px" }}
+                  style={{ marginRight: "3px" }}
                 >
                   {word}
                 </motion.span>
               ))
             ) : (
               // Simple version (after first animation)
-              <div className="text-xl font-bold text-start max-w-5xl leading-relaxed">
+              <div className="text-md font-bold text-start max-w-5xl leading-relaxed">
                 {text}
               </div>
             )}

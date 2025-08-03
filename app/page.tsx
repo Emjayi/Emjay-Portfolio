@@ -64,7 +64,7 @@ export default function Home() {
 							<About />
 						</div>
 						<div className="-mt-56 h-[1600px] mb-16 ">
-							<div className="sticky top-24">
+							<div className="sticky top-6 md:top-24">
 								<h2 className="text-xl font-bold text-start max-w-5xl leading-relaxed">
 									My tech stack...
 								</h2>

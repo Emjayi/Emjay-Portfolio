@@ -475,24 +475,6 @@ export const tech = [
 		designation: "Create",
 		image: "/icons/next-dark.png",
 	},
-	// {
-	// 	id: 3,
-	// 	name: "Angular",
-	// 	designation: "Framework",
-	// 	image: "/icons/angular.png",
-	// },
-	// {
-	// 	id: 4,
-	// 	name: "Vue",
-	// 	designation: "Framework",
-	// 	image: "/icons/vue.webp",
-	// },
-	// {
-	// 	id: 5,
-	// 	name: "Astro",
-	// 	designation: "Affordable",
-	// 	image: "/icons/astro.png",
-	// },
 	{
 		id: 9,
 		name: "Javascript",
@@ -558,6 +540,24 @@ export const tech = [
 		name: "Python",
 		designation: "Development",
 		image: "/icons/python.png",
+	},
+	{
+		id: 3,
+		name: "AWS",
+		designation: "Framework",
+		image: "/icons/aws.png",
+	},
+	{
+		id: 4,
+		name: "Docker",
+		designation: "Framework",
+		image: "/icons/docker.png",
+	},
+	{
+		id: 5,
+		name: "Cloudflare",
+		designation: "Affordable",
+		image: "/icons/cloudflare.png",
 	},
 	{
 		id: 7,
