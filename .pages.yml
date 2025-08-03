@@ -2,6 +2,7 @@ media:
   - name: Media
     input: public
     output: /
+
 content: 
   - name: posts
     label: Posts
@@ -16,7 +17,58 @@ content:
     - {name: tags, label: Tags, type: string}
     - {name: image, label: Image, type: image}
     - {name: body, label: Body, type: rich-text}
+    - {name: slug, label: Slug, type: string}
+
   - name: projects
     label: Projects
     type: collection
     path: app/_projects
+    fields:
+    - {name: title, label: Title, type: string}
+    - {name: description, label: Description, type: string}
+    - {name: date, label: Date, type: date}
+    - {name: author, label: Author, type: string}
+    - {name: category, label: Category, type: string}
+    - {name: tags, label: Tags, type: string}
+    - {name: image, label: Image, type: image}
+    - {name: body, label: Body, type: rich-text}
+    - {name: src, label: Source Image, type: string}
+    - {name: images, label: Additional Images, type: list}
+    - {name: link, label: Live Link, type: string}
+    - {name: git_link, label: GitHub Link, type: string}
+    - {name: color, label: Theme Color, type: string}
+
+  - name: other_projects
+    label: Other Projects
+    type: collection
+    path: app/_other_projects
+    fields:
+    - {name: title, label: Title, type: string}
+    - {name: description, label: Description, type: string}
+    - {name: date, label: Date, type: date}
+    - {name: author, label: Author, type: string}
+    - {name: category, label: Category, type: string}
+    - {name: tags, label: Tags, type: string}
+    - {name: image, label: Image, type: image}
+    - {name: body, label: Body, type: rich-text}
+    - {name: src, label: Source Image, type: string}
+    - {name: images, label: Additional Images, type: list}
+    - {name: link, label: Live Link, type: string}
+    - {name: git_link, label: GitHub Link, type: string}
+
+  - name: tools
+    label: Tools
+    type: collection
+    path: app/_tools
+    fields:
+    - {name: title, label: Title, type: string}
+    - {name: description, label: Description, type: string}
+    - {name: date, label: Date, type: date}
+    - {name: author, label: Author, type: string}
+    - {name: category, label: Category, type: string}
+    - {name: tags, label: Tags, type: string}
+    - {name: image, label: Image, type: image}
+    - {name: body, label: Body, type: rich-text}
+    - {name: name, label: Tool Name, type: string}
+    - {name: href, label: Tool Path, type: string}
+    - {name: git_link, label: GitHub Link, type: string}
