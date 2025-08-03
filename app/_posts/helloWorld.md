@@ -5,7 +5,7 @@ date: "2024-01-15"
 author: "Emjay Sepahi"
 category: "Programming"
 tags: ["Web Development", "HTML", "CSS", "JavaScript", "Beginner"]
-image: "/products/1.jpg"
+image: "/public/products/1.jpg"
 ---
 
 # Hello World: Getting Started with Web Development
