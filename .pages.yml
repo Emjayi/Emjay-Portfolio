@@ -1,5 +1,5 @@
 media: 
-  - name: public
+  - name: Media
     input: public
     output: /
 content: 
