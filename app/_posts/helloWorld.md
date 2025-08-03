@@ -4,8 +4,8 @@ description: "A beginner's guide to starting your journey in web development, co
 date: "2024-01-15"
 author: "Emjay Sepahi"
 category: "Programming"
-tags: ["Web Development", "HTML", "CSS", "JavaScript", "Beginner"]
-image: "/public/products/1.jpg"
+tags: "Web Development,HTML,CSS,JavaScript,Beginner"
+image: "/products/1.jpg"
 ---
 
 # Hello World: Getting Started with Web Development

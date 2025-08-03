@@ -4,8 +4,8 @@ description: "Learn the fundamentals of React, including components, state manag
 date: "2024-01-20"
 author: "Emjay Sepahi"
 category: "Programming"
-tags: ["React", "JavaScript", "Frontend", "Components", "State"]
-image: "/public/products/2.jpg"
+tags: "React,JavaScript,Frontend,Components,State"
+image: "/products/2.jpg"
 ---
 
 # React Basics: Understanding Components and State
