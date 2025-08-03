@@ -63,10 +63,10 @@ export default function Home() {
 						<div className="relative z-10">
 							<About />
 						</div>
-						<div className="-mt-56 h-[1600px] mb-16 max-w-[800px]">
+						<div className="-mt-56 h-[1600px] mb-16 ">
 							<div className="sticky top-24">
 								<h2 className="text-xl font-bold text-start max-w-5xl leading-relaxed">
-									Some of my skills...
+									My tech stack...
 								</h2>
 								<Skills />
 							</div>

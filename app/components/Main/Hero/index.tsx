@@ -10,9 +10,7 @@ import { BackgroundLines } from "../../ui/background-lines"
 
 const navigation = [
 	{ name: "Projects", href: "projects" },
-	{ name: "Experiences", href: "experiences" },
 	{ name: "Tools", href: "/tools" },
-	{ name: "About", href: "about" },
 	{ name: "Blog", href: "/blog" },
 	{ name: "Contact", href: "contacts" },
 ]

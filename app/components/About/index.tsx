@@ -21,7 +21,7 @@ const About = () => {
 		{
 			type: "paragraph",
 			content:
-				"I began my journey with WordPress and Elementor, gradually moving into front-end development by learning CSS, HTML, and JavaScript.",
+				"I began my journey with WordPress, gradually moving into front-end development by learning CSS, HTML, and JavaScript.",
 			startPosition: 0.10,
 			endPosition: 0.18,
 		},
