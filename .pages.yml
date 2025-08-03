@@ -19,5 +19,5 @@ content:
   - name: data
     label: Data
     type: collection
-    path: app/content
+    path: app/content/data.js
    
