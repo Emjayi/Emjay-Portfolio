@@ -52,7 +52,7 @@ export default function BlogSidebar({ currentSlug }: BlogSidebarProps) {
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap gap-1">
-                                    {post.tags.slice(0, 2).map((tag) => (
+                                    {Array.isArray(post.tags) && post.tags.slice(0, 2).map((tag) => (
                                         <Badge
                                             key={tag}
                                             variant="secondary"
@@ -61,7 +61,7 @@ export default function BlogSidebar({ currentSlug }: BlogSidebarProps) {
                                             {tag}
                                         </Badge>
                                     ))}
-                                    {post.tags.length > 2 && (
+                                    {Array.isArray(post.tags) && post.tags.length > 2 && (
                                         <Badge
                                             variant="secondary"
                                             className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"

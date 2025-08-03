@@ -40,7 +40,11 @@ export function getAllPosts(): BlogPost[] {
                 date: matterResult.data.date || '',
                 author: matterResult.data.author || '',
                 category: matterResult.data.category || '',
-                tags: matterResult.data.tags || [],
+                tags: Array.isArray(matterResult.data.tags)
+                    ? matterResult.data.tags
+                    : typeof matterResult.data.tags === 'string'
+                        ? matterResult.data.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
+                        : [],
                 image: matterResult.data.image || '',
                 content: matterResult.content,
             }
@@ -72,7 +76,11 @@ export function getPostBySlug(slug: string): BlogPost | null {
             date: matterResult.data.date || '',
             author: matterResult.data.author || '',
             category: matterResult.data.category || '',
-            tags: matterResult.data.tags || [],
+                tags: Array.isArray(matterResult.data.tags)
+                    ? matterResult.data.tags
+                    : typeof matterResult.data.tags === 'string'
+                        ? matterResult.data.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
+                        : [],
             image: matterResult.data.image || '',
             content: matterResult.content,
         }
@@ -88,5 +96,5 @@ export function getPostsByCategory(category: string): BlogPost[] {
 
 export function getPostsByTag(tag: string): BlogPost[] {
     const allPosts = getAllPosts()
-    return allPosts.filter((post) => post.tags.includes(tag))
+    return allPosts.filter((post) => Array.isArray(post.tags) && post.tags.includes(tag))
 } 

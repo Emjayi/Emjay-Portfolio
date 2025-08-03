@@ -71,7 +71,7 @@ export default function Page({ params }: PageProps) {
 
 				<div className="flex flex-wrap gap-2">
 					<Tag className="h-4 w-4 text-zinc-400 mt-1" />
-					{post.tags.map((tag: string) => (
+					{Array.isArray(post.tags) && post.tags.map((tag: string) => (
 						<Badge key={tag} variant="secondary" className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700">
 							{tag}
 						</Badge>

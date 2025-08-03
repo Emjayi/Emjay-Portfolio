@@ -227,12 +227,12 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                                                 {post.description}
                                             </p>
                                             <div className="flex flex-wrap gap-2">
-                                                {post.tags.slice(0, 3).map((tag: string) => (
+                                                {Array.isArray(post.tags) && post.tags.slice(0, 3).map((tag: string) => (
                                                     <Badge key={tag} variant="outline" className="text-xs bg-zinc-50 dark:bg-zinc-800">
                                                         {tag}
                                                     </Badge>
                                                 ))}
-                                                {post.tags.length > 3 && (
+                                                {Array.isArray(post.tags) && post.tags.length > 3 && (
                                                     <Badge variant="outline" className="text-xs bg-zinc-50 dark:bg-zinc-800">
                                                         +{post.tags.length - 3}
                                                     </Badge>
