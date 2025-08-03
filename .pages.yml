@@ -16,8 +16,7 @@ content:
     - {name: tags, label: Tags, type: string}
     - {name: image, label: Image, type: image}
     - {name: body, label: Body, type: rich-text}
-  - name: data
-    label: Data
+  - name: projects
+    label: Projects
     type: collection
-    path: app/content/data.js
-   
+    path: app/_projects
