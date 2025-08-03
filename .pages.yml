@@ -16,8 +16,8 @@ content:
     - {name: tags, label: Tags, type: string}
     - {name: image, label: Image, type: image}
     - {name: body, label: Body, type: rich-text}
-content_2:
-   - name: data
-     label: Data
-     type: collection
-     path: app/content
+  - name: data
+    label: Data
+    type: collection
+    path: app/content
+   
