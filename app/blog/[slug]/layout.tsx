@@ -13,7 +13,7 @@ interface LayoutProps {
 
 export default function Layout({ children, params }: LayoutProps) {
 	const post = getPostBySlug(params.slug);
-	const backgroundImage = post?.image || "/products/3.jpg"; // fallback to original image
+	const backgroundImage = post?.image.replace("/public", "") || "/products/3.jpg"; // fallback to original image
 
 	return (
 		<ThemeProvider attribute="class" defaultTheme="system">

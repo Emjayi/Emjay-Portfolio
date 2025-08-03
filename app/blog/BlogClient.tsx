@@ -191,7 +191,7 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                                                 className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                             >
                                                 <Image
-                                                    src={post.image}
+                                                    src={post?.image.replace("/public", "")}
                                                     alt={post.title}
                                                     width={800}
                                                     height={600}
