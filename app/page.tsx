@@ -60,13 +60,13 @@ export default function Home() {
 						<div className="">
 							<Hero />
 						</div>
-						<div className="relative z-10">
+						{/* <div className="relative z-10">
 							<About />
-						</div>
-						<div className="-mt-56 h-[1600px] mb-16 ">
+						</div> */}
+						<div className=" h-[1600px] mb-16 ">
 							<div className="sticky top-6 md:top-24">
-								<h2 className="text-xl font-bold text-start max-w-5xl leading-relaxed">
-									My tech stack...
+								<h2 className="text-xl font-bold text-center max-w-5xl leading-relaxed">
+									I work with these
 								</h2>
 								<Skills />
 							</div>

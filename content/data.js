@@ -37,36 +37,91 @@ export const posts = [
 
 // Projects collection - Main portfolio projects
 export const projects = [
-	{
-		title: "Kerpino MVP",
-		description: "Immersive Unreal Pixel Streaming Platform: A Cutting-Edge Virtual Showroom for Interactive Interior Design Experiences. Plan floor image to 3D interactive unrela engine world.",
-		date: "2024-01-20",
-		author: "Emjay Sepahi",
-		category: "3D Platform",
-		tags: "unreal-engine, 3d, streaming, interior-design, virtual-showroom",
-		image: "/images/kerpo.jpg",
-		body: "Kerpino MVP represents a breakthrough in virtual interior design experiences...",
-		src: "kerpo.jpg",
-		images: [],
-		link: "https://kerpino.vercel.app/",
-		color: "#008b8b",
-		git_link: null
-	},
-	{
-		title: "Baroque",
-		description: "Baroque Company was founded in 2010 by Engineer Hasan Roshanayi Moghadam, after his 1982 graduation from Ferdowsi University of Mashhad (Civil Engineering). With years of experience in major construction projects, the company was established to incorporate modern techniques and a new generation of specialists.",
-		date: "2024-01-18",
-		author: "Emjay Sepahi",
-		category: "Corporate Website",
-		tags: "construction, corporate, nextjs, modern-design",
-		image: "/images/baroque.png",
-		body: "Baroque represents a modern approach to corporate website design...",
-		src: "baroque.png",
-		images: [],
-		link: "https://baroque-seven.vercel.app/",
-		git_link: "https://github.com/Emjayi/baroque-next",
-		color: "#96751e"
-	},
+{
+	title: "Petros",
+	description:
+		"A modern eCommerce platform for Petros, a leading Iranian producer of sausages, cold cuts, and protein products. Built to provide a fast, intuitive shopping experience while showcasing the brand's diverse product catalog.",
+	date: "2025-01-20",
+	author: "Emjay Sepahi",
+	category: "Ecommerce",
+	tags: "nextjs, ecommerce, food-industry, protein-products, ui-ux",
+	image: "/images/kerpo.jpg",
+	body:
+		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
+	src: "petros.png",
+	images: [],
+	link: "https://petros.liara.run/",
+	color: "#4e0b0bff",
+	git_link: null
+},
+{
+	title: "Guard Home",
+	description:
+		"An eCommerce platform for Guard Home, a retail business specializing in mobile screen protectors, camera protectors, and protective accessories, backed by a physical store in Mashhad.",
+	date: "2025-01-20",
+	author: "Emjay Sepahi",
+	category: "Ecommerce",
+	tags: "nextjs, ecommerce, mobile-accessories, retail, responsive-design",
+	image: "/images/kerpo.jpg",
+	body:
+		"Guard Home combines online shopping with a physical retail presence, providing customers with an easy way to browse and purchase premium mobile protection products.",
+	src: "guard.png",
+	images: [],
+	link: "https://khaneh-gard.ir/",
+	color: "#0a2b49ff",
+	git_link: null
+},
+{
+	title: "Sol Studio",
+	description:
+		"A multi-tenant platform developed for Sol Studio, a digital agency, enabling the management of multiple client workspaces, projects, and services from a unified dashboard.",
+	date: "2024-01-20",
+	author: "Emjay Sepahi",
+	category: "Multi-Tenant SaaS",
+	tags: "nextjs, saas, multi-tenant, dashboard, agency, prisma",
+	image: "/images/kerpo.jpg",
+	body:
+		"Sol Studio is a scalable multi-tenant application built for a digital agency, allowing multiple businesses to operate independently while sharing the same secure platform architecture.",
+	src: "sol.png",
+	images: [],
+	link: "https://sol.liara.run/",
+	color: "#353535ff",
+	git_link: null
+},
+{
+	title: "Kerpino MVP",
+	description:
+		"An immersive Unreal Engine Pixel Streaming platform that transforms 2D floor plans into interactive 3D virtual environments, enabling real-time exploration of interior spaces directly in the browser.",
+	date: "2024-01-20",
+	author: "Emjay Sepahi",
+	category: "3D Platform",
+	tags: "unreal-engine, pixel-streaming, 3d, interior-design, virtual-showroom",
+	image: "/images/kerpo.jpg",
+	body:
+		"Kerpino MVP demonstrates the potential of Unreal Engine Pixel Streaming by delivering high-fidelity, browser-based 3D experiences for architecture and interior design visualization.",
+	src: "kerpo.jpg",
+	images: [],
+	link: "https://kerpino.vercel.app/",
+	color: "#120b2cff",
+	git_link: null
+},
+{
+	title: "Baroque",
+	description:
+		"Corporate website for Baroque, a construction and engineering company established in 2010. The platform highlights the company's expertise, portfolio, and services through a modern, responsive web experience.",
+	date: "2024-01-18",
+	author: "Emjay Sepahi",
+	category: "Corporate Website",
+	tags: "construction, corporate, nextjs, responsive, ui-ux",
+	image: "/images/baroque.png",
+	body:
+		"Baroque features a clean, modern corporate identity, presenting the company's history, engineering expertise, and construction projects with a strong focus on usability and visual design.",
+	src: "baroque.png",
+	images: [],
+	link: "https://baroquegp.vercel.app/",
+	git_link: "https://github.com/Emjayi/baroque-next",
+	color: "#332604ff"
+},
 	{
 		title: "Alireza's Portfolio",
 		description: "Alireza Refaei is a skilled industrial, commercial, and product photographer, specializing in capturing high-quality images that highlight the essence and functionality of products and projects.",
@@ -79,7 +134,7 @@ export const projects = [
 		src: "alireza.png",
 		link: "https://alirezarefaei.com/",
 		git_link: "https://github.com/Emjayi/refaee-photography",
-		color: "#225560"
+		color: "#491a03ff"
 	},
 	{
 		title: "My Portfolio",
@@ -93,7 +148,20 @@ export const projects = [
 		src: "emjay.png",
 		link: "https://emjaysepahi.com/",
 		git_link: "https://github.com/Emjayi/Emjay-Portfolio",
-		color: "#225560"
+		color: "#604f22ff"
+	},
+	{
+		title: "Bayatech",
+		description: "Though she views photography as a medium for storytelling, Nahid's images don't insist on a narrative. Both crisp and ethereal, they're encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
+		date: "2024-01-08",
+		author: "Emjay Sepahi",
+		category: "Photography Portfolio",
+		tags: "photography, portfolio, storytelling, artistic",
+		image: "/images/nahid.png",
+		body: "Nahid's artistic photography portfolio showcasing her unique vision...",
+		src: "bayatech.png",
+		link: "https://bayatechlift.com/",
+		color: "#646464ff"
 	},
 	{
 		title: "Takfazkala",
@@ -109,34 +177,6 @@ export const projects = [
 		color: "#692424",
 		git_link: null
 	},
-	{
-		title: "Nahid's Portfolio",
-		description: "Though she views photography as a medium for storytelling, Nahid's images don't insist on a narrative. Both crisp and ethereal, they're encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
-		date: "2024-01-08",
-		author: "Emjay Sepahi",
-		category: "Photography Portfolio",
-		tags: "photography, portfolio, storytelling, artistic",
-		image: "/images/nahid.png",
-		body: "Nahid's artistic photography portfolio showcasing her unique vision...",
-		src: "nahid.png",
-		link: "https://nahidshahriarpour.com/",
-		git_link: "https://github.com/Emjayi/nahid-photography",
-		color: "#220060"
-	},
-	{
-		title: "IML Technology",
-		description: "Pooyesh Abzar Pars Company has 16 years of experience in the field of designing and manufacturing plastic injection molds, plastic injection machines and automation of plastic parts production. (Still in Progress)",
-		date: "2024-01-05",
-		author: "Emjay Sepahi",
-		category: "Manufacturing",
-		tags: "manufacturing, plastic-injection, automation, industrial",
-		image: "/images/iml.png",
-		body: "A comprehensive platform for IML Technology's manufacturing services...",
-		src: "iml.png",
-		git_link: "https://github.com/Emjayi/iml-next",
-		color: "#631750",
-		link: null
-	}
 ];
 
 // Other Projects collection - Additional projects
@@ -500,6 +540,12 @@ export const tech = [
 		image: "/icons/nodejs.png",
 	},
 	{
+		id: 8,
+		name: "Postgres",
+		designation: "Affordable",
+		image: "/icons/postgres.png",
+	},
+	{
 		id: 20,
 		name: "Supabase",
 		designation: "Database",
@@ -528,12 +574,6 @@ export const tech = [
 		name: "SCSS",
 		designation: "Design",
 		image: "/icons/sass.png",
-	},
-	{
-		id: 8,
-		name: "WordPress",
-		designation: "Affordable",
-		image: "/icons/wordpress.png",
 	},
 	{
 		id: 12,

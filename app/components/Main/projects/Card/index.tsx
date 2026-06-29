@@ -28,14 +28,16 @@ const Card = memo(({ title, description, src, link, git_link, color, i }: any) =
 	}
 
 	return (
-		<div className={styles.cardContainer} ref={container}>
-			<Link
-				href={link || "#"}
+		<Link href={link || "#"}
 				target={link && link !== "#" ? "_blank" : ""}
 				className={styles.card}
-				style={{ top: `calc(-5vh + ${i * 25}px)` }}
+				>
+					
+		<div style={{ top: `calc(-5vh + ${ i * 25}px)` }} className={styles.cardContainer} ref={container}>
+			<div
+				className={styles.card}
 			>
-				<SpotlightCard className="custom-spotlight-card h-[80vh] " spotlightColor={color}>
+				<SpotlightCard className="custom-spotlight-card h-full" spotlightColor={color}>
 					<h2 className="text-zinc-200">{title}</h2>
 					<div className={styles.body}>
 						<div className={styles.description}>
@@ -73,8 +75,9 @@ const Card = memo(({ title, description, src, link, git_link, color, i }: any) =
 						</div>
 					</div>
 				</SpotlightCard>
-			</Link>
+			</div>
 		</div>
+				</Link>
 	)
 })
 

@@ -20,12 +20,12 @@ export default function BlogSidebar({ currentSlug }: BlogSidebarProps) {
     return (
         <aside className="w-full lg:w-80 space-y-8">
             {/* Search */}
-            <BlogSearch allPosts={allPosts} />
+            {/* <BlogSearch allPosts={allPosts} /> */}
 
             {/* Latest Posts */}
             <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 p-6">
                 <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-4">
-                    Latest Posts
+                    Other Posts
                 </h3>
                 <div className="space-y-4">
                     {latestPosts.map((post) => (

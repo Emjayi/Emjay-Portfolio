@@ -74,7 +74,7 @@ export default function Footer() {
 								to="home"
 								smooth={true}
 								duration={1200}
-								className="absolute hidden lg:flex items-center gap-2 bottom-16 right-16 cursor-pointer text-xl duration-500 p-2 text-zinc-600 hover:text-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-300"
+								className="absolute hidden lg:flex items-center gap-2 bottom-16 right-16 cursor-pointer text-xl duration-500 p-2 text-zinc-600 text-zinc-500 hover:text-zinc-300"
 							>
 								<ArrowUpIcon width={22} height={22} />
 								<p>Back to top</p>
@@ -84,7 +84,7 @@ export default function Footer() {
 							<>
 								<Link
 									href="/"
-									className="absolute hidden lg:flex items-center gap-2 bottom-16 lg:right-16 cursor-pointer text-xl duration-500 p-2 text-zinc-600 hover:text-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-300"
+									className="absolute hidden lg:flex items-center gap-2 bottom-16 lg:right-16 cursor-pointer text-xl duration-500 p-2 text-zinc-600 text-zinc-500 hover:text-zinc-300"
 								>
 									<ArrowLeft width={22} height={22} />
 									<p>back to home</p>
@@ -94,12 +94,12 @@ export default function Footer() {
 						{/* <div className="absolute flex bottom-4 lg:right-16">
 							{(pathName !== "/tools") && <Link
 								href="/tools"
-								className="flex items-center gap-2 cursor-pointer text-xl duration-500 p-2 text-zinc-600 hover:text-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-300">
+								className="flex items-center gap-2 cursor-pointer text-xl duration-500 p-2 text-zinc-600 text-zinc-500 hover:text-zinc-300">
 								<p>Tools</p>
 							</Link>}
 							{(pathName !== "/blog") && <Link
 								href="/blog"
-								className="flex items-center gap-2 cursor-pointer text-xl duration-500 p-2 text-zinc-600 hover:text-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-300">
+								className="flex items-center gap-2 cursor-pointer text-xl duration-500 p-2 text-zinc-600 text-zinc-500 hover:text-zinc-300">
 								<p>Blog</p>
 							</Link>}
 						</div> */}
@@ -143,10 +143,10 @@ const Section1 = () => {
 				Give me a call.
 			</p>
 			<Nav />
-			<div className=" -mt-6 sm:absolute sm:bottom-8 w-full dark:text-zinc-400 text-zinc-700 text-sm text-center mx-auto">
+			<div className=" -mt-6 sm:absolute sm:bottom-8 w-full text-zinc-400  text-sm text-center mx-auto">
 				<ThemeSwitcher className="" />
 				<p className="hidden sm:block">
-					All rights reserved <br className="hidden sm:block" /> <Link href={"/"} className="dark:hover:text-zinc-100 hover:text-zinc-700">Emjay Sepahi</Link> ©2025
+					All rights reserved <br className="hidden sm:block" /> <Link href={"/"} className="hover:text-zinc-100 hover:text-zinc-700">Emjay Sepahi</Link> ©2025
 				</p>
 			</div>
 		</div>

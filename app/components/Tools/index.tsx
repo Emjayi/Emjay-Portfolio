@@ -3,6 +3,7 @@ import { tools } from "@/content/data";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
+import { Button } from "../ui/button";
 
 export default function Index() {
 	const ref = useRef(null);
@@ -11,13 +12,13 @@ export default function Index() {
 		stiffness: 300,
 		damping: 200,
 	});
-	const x = useTransform(smoothScroll, [0, 1], [-100, 100]);
-	const x2 = useTransform(smoothScroll, [0, 1], [200, -300]);
-	const x3 = useTransform(smoothScroll, [0, 1], [-1400, 100]);
+	const x = useTransform(smoothScroll, [0, 1], [-600, 100]);
+	const x2 = useTransform(smoothScroll, [0, 1], [900, -300]);
+	const x3 = useTransform(smoothScroll, [0, 1], [-2600, 0]);
 	const x4 = useTransform(smoothScroll, [0, 1], [300, -400]);
 	return (
 		<div
-			className="flex flex-col mt-56 md:mt-24 w-screen gap-2 flex-wrap justify-center items-center"
+			className="flex flex-col md:-mt-10 md:-mb-10 mt-56 w-screen gap-2 flex-wrap justify-center items-center"
 			ref={ref}
 		>
 			<div className="hidden md:flex flex-col w-full gap-4 flex-wrap justify-center items-center">
@@ -26,9 +27,9 @@ export default function Index() {
 						<div key={index}>
 							{index < 5 && (
 								<Link href={`/${t.href}`}>
-									<HoverBorderGradient className=" py-4 px-8 inline">
+									<Button variant={"outline"} className=" px-8 inline">
 										<p className="">{t.name}</p>
-									</HoverBorderGradient>
+									</Button>
 								</Link>
 							)}
 						</div>
@@ -39,9 +40,9 @@ export default function Index() {
 						<div key={index}>
 							{index > 5 && index < 12 && (
 								<Link href={`/tools/${t.href}`}>
-									<HoverBorderGradient className=" py-4 px-8 inline">
+									<Button variant={"outline"} className=" px-8 inline">
 										<p className="">{t.name}</p>
-									</HoverBorderGradient>
+									</Button>
 								</Link>
 							)}
 						</div>
@@ -52,9 +53,9 @@ export default function Index() {
 						<div key={index}>
 							{index > 12 && index < 18 && (
 								<Link href={`/tools/${t.href}`}>
-									<HoverBorderGradient className=" py-4 px-8 inline">
+									<Button variant={"outline"} className=" px-8 inline">
 										<p className="">{t.name}</p>
-									</HoverBorderGradient>
+									</Button>
 								</Link>
 							)}
 						</div>
@@ -65,23 +66,14 @@ export default function Index() {
 						<div key={index}>
 							{index > 18 && (
 								<Link href={`/tools/${t.href}`}>
-									<HoverBorderGradient className=" py-4 px-8 inline">
+									<Button variant={"outline"} className=" px-8 inline">
 										<p className="">{t.name}</p>
-									</HoverBorderGradient>
+									</Button>
 								</Link>
 							)}
 						</div>
 					))}
 				</motion.div>
-			</div>
-			<div className="flex w-full px-5 gap-4 flex-wrap justify-center items-center md:hidden">
-				{tools.map((t, index) => (
-					<Link key={100 + index} href={`/tools/${t.href}`}>
-						<HoverBorderGradient className="text-sm py-2 px-4 inline">
-							<p className="">{t.name}</p>
-						</HoverBorderGradient>
-					</Link>
-				))}
 			</div>
 		</div>
 	);

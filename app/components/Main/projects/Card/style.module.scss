@@ -1,16 +1,17 @@
 .cardContainer {
-  height: 100vh;
+  height: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: sticky;
+  margin-top: 25px;
   top: 0;
 
   .card {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 80%;
+    height: 100%;
     width: 90%;
     border-radius: 25px;
     padding: 0 20px;
@@ -30,6 +31,10 @@
       gap: 50px;
 
       .description {
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 40%;
         @media screen and (max-width: 768px) {
           display: none;
@@ -65,7 +70,7 @@
         @media screen and (max-width: 768px) {
           width: 100%;
         }
-        height: 100%;
+        height: 90%;
         border-radius: 25px;
         overflow: hidden;
 

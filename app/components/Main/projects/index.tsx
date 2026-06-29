@@ -25,11 +25,13 @@ export default function Projects() {
 	return (
 		<>
 			<motion.div style={{ y: y }} ref={ref} id="projects">
-				<h2 className="text-4xl text-center my-4">Solo Projects</h2>
+				<h2 className="text-4xl text-center my-4 mb-36">Solo Projects</h2>
+				<div className="">
 				{projectCards}
+				</div>
 			</motion.div>
 			<motion.div style={{ y: y }} ref={ref} id="projects">
-				<h2 className="text-3xl text-center mt-32 mb-4">
+				<h2 className="text-3xl text-center mt-72 mb-4">
 					Collabrations and Other Projects
 				</h2>
 				<div className="md:grid md:grid-rows-2 md:grid-cols-3 gap-4">

@@ -20,8 +20,8 @@ const LETTER_COLORS = {
 }
 
 const HIT_COLOR = "#292F36"
-const BACKGROUND_COLOR = "#000000"
-const BACKGROUND_COLOR_DARK = "#fff"
+const BACKGROUND_COLOR = "#191919ff"
+const BACKGROUND_COLOR_DARK = "#191919ff"
 const DEFAULT_PADDLE_COLOR = "#ddd"
 const DEFAULT_PADDLE_COLOR_DARK = "#292F36"
 const LETTER_SPACING = 1
@@ -336,7 +336,7 @@ export function BackForFooter() {
                     height: paddleLength,
                     targetY: canvas.height / 2 - paddleLength / 2,
                     isVertical: true,
-                    color: theme === "dark" ? DEFAULT_PADDLE_COLOR : DEFAULT_PADDLE_COLOR_DARK,
+                    color: DEFAULT_PADDLE_COLOR,
                 },
                 {
                     x: canvas.width - paddleWidth,
@@ -345,7 +345,7 @@ export function BackForFooter() {
                     height: paddleLength,
                     targetY: canvas.height / 2 - paddleLength / 2,
                     isVertical: true,
-                    color: theme === "dark" ? DEFAULT_PADDLE_COLOR : DEFAULT_PADDLE_COLOR_DARK,
+                    color: DEFAULT_PADDLE_COLOR,
                 },
                 {
                     x: canvas.width / 2 - paddleLength / 2,
@@ -354,7 +354,7 @@ export function BackForFooter() {
                     height: paddleWidth,
                     targetY: canvas.width / 2 - paddleLength / 2,
                     isVertical: false,
-                    color: theme === "dark" ? DEFAULT_PADDLE_COLOR : DEFAULT_PADDLE_COLOR_DARK,
+                    color: DEFAULT_PADDLE_COLOR,
                 },
                 {
                     x: canvas.width / 2 - paddleLength / 2,
@@ -363,7 +363,7 @@ export function BackForFooter() {
                     height: paddleWidth,
                     targetY: canvas.width / 2 - paddleLength / 2,
                     isVertical: false,
-                    color: theme === "dark" ? DEFAULT_PADDLE_COLOR : DEFAULT_PADDLE_COLOR_DARK,
+                    color: DEFAULT_PADDLE_COLOR,
                 },
             ]
         }
@@ -447,7 +447,7 @@ export function BackForFooter() {
         const drawGame = () => {
             if (!ctx) return
 
-            ctx.fillStyle = theme === "dark" ? BACKGROUND_COLOR : BACKGROUND_COLOR_DARK
+            ctx.fillStyle = BACKGROUND_COLOR
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
             pixelsRef.current.forEach((pixel) => {
@@ -481,7 +481,7 @@ export function BackForFooter() {
         return () => {
             window.removeEventListener("resize", resizeCanvas)
         }
-    }, [theme])
+    }, [])
 
     return (
         <ThemeProvider attribute="class" defaultTheme="system">
