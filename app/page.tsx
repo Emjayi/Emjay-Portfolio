@@ -14,10 +14,18 @@ import Head from "next/head"
 import Script from "next/script"
 import Skills from "./components/Main/Skills"
 
+let hasVisitedHome = false
+
 export default function Home() {
-	const [isLoading, setIsLoading] = useState(true)
+	const [isLoading, setIsLoading] = useState(!hasVisitedHome)
 
 	useEffect(() => {
+		if (hasVisitedHome) return
+		hasVisitedHome = true
+		if (window.location.hash) {
+			setIsLoading(false)
+			return
+		}
 		; (async () => {
 			setTimeout(() => {
 				setIsLoading(false)

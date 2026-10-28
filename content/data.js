@@ -38,6 +38,23 @@ export const posts = [
 // Projects collection - Main portfolio projects
 export const projects = [
 {
+	title: "Torghabe Bazar",
+	description:
+		"An eCommerce platform for Torghabe Bazar, leading  Torghabe city marketplace.",
+	date: "2025-01-20",
+	author: "Emjay Sepahi",
+	category: "Ecommerce",
+	tags: "nextjs, ecommerce, food-industry, protein-products, ui-ux",
+	image: "/images/kerpo.jpg",
+	body:
+		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
+	src: "petros.png",
+	images: [],
+	link: "https://torghabebazar.ir/",
+	color: "#4e0b0bff",
+	git_link: null
+},
+{
 	title: "Petros",
 	description:
 		"A modern eCommerce platform for Petros, a leading Iranian producer of sausages, cold cuts, and protein products. Built to provide a fast, intuitive shopping experience while showcasing the brand's diverse product catalog.",
@@ -50,25 +67,8 @@ export const projects = [
 		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
 	src: "petros.png",
 	images: [],
-	link: "https://petros.liara.run/",
+	link: "https://petros-rho.vercel.app/",
 	color: "#4e0b0bff",
-	git_link: null
-},
-{
-	title: "Guard Home",
-	description:
-		"An eCommerce platform for Guard Home, a retail business specializing in mobile screen protectors, camera protectors, and protective accessories, backed by a physical store in Mashhad.",
-	date: "2025-01-20",
-	author: "Emjay Sepahi",
-	category: "Ecommerce",
-	tags: "nextjs, ecommerce, mobile-accessories, retail, responsive-design",
-	image: "/images/kerpo.jpg",
-	body:
-		"Guard Home combines online shopping with a physical retail presence, providing customers with an easy way to browse and purchase premium mobile protection products.",
-	src: "guard.png",
-	images: [],
-	link: "https://khaneh-gard.ir/",
-	color: "#0a2b49ff",
 	git_link: null
 },
 {
@@ -84,7 +84,7 @@ export const projects = [
 		"Sol Studio is a scalable multi-tenant application built for a digital agency, allowing multiple businesses to operate independently while sharing the same secure platform architecture.",
 	src: "sol.png",
 	images: [],
-	link: "https://sol.liara.run/",
+	link: "https://solstudio.pro/",
 	color: "#353535ff",
 	git_link: null
 },
@@ -151,17 +151,21 @@ export const projects = [
 		color: "#604f22ff"
 	},
 	{
-		title: "Bayatech",
-		description: "Though she views photography as a medium for storytelling, Nahid's images don't insist on a narrative. Both crisp and ethereal, they're encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
-		date: "2024-01-08",
-		author: "Emjay Sepahi",
-		category: "Photography Portfolio",
-		tags: "photography, portfolio, storytelling, artistic",
-		image: "/images/nahid.png",
-		body: "Nahid's artistic photography portfolio showcasing her unique vision...",
-		src: "bayatech.png",
-		link: "https://bayatechlift.com/",
-		color: "#646464ff"
+	title: "Guard Home",
+	description:
+		"An eCommerce platform for Guard Home, a retail business specializing in mobile screen protectors, camera protectors, and protective accessories, backed by a physical store in Mashhad.",
+	date: "2025-01-20",
+	author: "Emjay Sepahi",
+	category: "Ecommerce",
+	tags: "nextjs, ecommerce, mobile-accessories, retail, responsive-design",
+	image: "/images/kerpo.jpg",
+	body:
+		"Guard Home combines online shopping with a physical retail presence, providing customers with an easy way to browse and purchase premium mobile protection products.",
+	src: "guard.png",
+	images: [],
+	link: "https://khaneh-gard.ir/",
+	color: "#0a2b49ff",
+	git_link: null
 	},
 	{
 		title: "Takfazkala",

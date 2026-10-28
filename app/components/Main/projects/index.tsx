@@ -30,7 +30,7 @@ export default function Projects() {
 				{projectCards}
 				</div>
 			</motion.div>
-			<motion.div style={{ y: y }} ref={ref} id="projects">
+			<motion.div style={{ y: y }} ref={ref} id="collaborations">
 				<h2 className="text-3xl text-center mt-72 mb-4">
 					Collabrations and Other Projects
 				</h2>

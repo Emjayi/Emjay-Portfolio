@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from "react"
+import { ProjectNavigation } from "./components/project-navigation"
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://emjaysepahi.com"),
@@ -98,7 +99,7 @@ export default function RootLayout({
 					}`}
 			>
 				<Suspense>
-					{children}
+					<ProjectNavigation>{children}</ProjectNavigation>
 					<SpeedInsights />
 					<Analytics />
 				</Suspense>

@@ -7,12 +7,18 @@ import Lenis from "lenis";
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 	useEffect(() => {
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		const lenis = new Lenis();
+		let frame: number;
 		function raf(time: any) {
 			lenis.raf(time);
-			requestAnimationFrame(raf);
+			frame = requestAnimationFrame(raf);
 		}
-		requestAnimationFrame(raf);
+		frame = requestAnimationFrame(raf);
+		return () => {
+			cancelAnimationFrame(frame);
+			lenis.destroy();
+		};
 	}, []);
 	return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }

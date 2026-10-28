@@ -1,0 +1,9 @@
+.loading { position: fixed; inset: 0; z-index: 10001; pointer-events: none; }
+.progress { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: #a1a1aa; transform-origin: left; animation: progress 1.5s ease-in-out infinite; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 13px 18px; border-radius: 100px; background: #18181b; color: #fafafa; box-shadow: 0 8px 32px #0002; font-family: var(--font-inter), sans-serif; font-size: 13px; white-space: nowrap; }
+.spinner { width: 14px; height: 14px; border: 1.5px solid #ffffff40; border-top-color: #fff; border-radius: 50%; animation: spin 700ms linear infinite; }
+.morph { position: fixed; z-index: 10000; overflow: hidden; pointer-events: none; }
+.morph img { width: 100%; height: 100%; object-fit: contain; }
+@keyframes progress { 0% { transform: scaleX(.08); opacity: .5; } 80% { transform: scaleX(.95); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .progress, .spinner { animation: none; } .progress { transform: none; } }

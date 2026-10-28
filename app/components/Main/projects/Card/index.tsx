@@ -5,7 +5,8 @@ import type React from "react"
 import styles from "./style.module.scss"
 import { useRef, memo } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import Link from "next/link"
+import { ProjectLink } from "@/app/components/project-navigation"
+import { projectSlug, projectCover } from "@/lib/solo-projects"
 import SpotlightCard from "../../../ui/carddd"
 import { Button } from "@/app/components/ui/button"
 import { ExternalLink, Github } from "lucide-react"
@@ -24,25 +25,21 @@ const Card = memo(({ title, description, src, link, git_link, color, i }: any) =
 	const handleButtonClick = (e: React.MouseEvent, url: string) => {
 		e.preventDefault()
 		e.stopPropagation()
-		window.open(url, "_blank")
+		window.open(url, "_blank", "noopener,noreferrer")
 	}
 
 	return (
-		<Link href={link || "#"}
-				target={link && link !== "#" ? "_blank" : ""}
-				className={styles.card}
-				>
-					
 		<div style={{ top: `calc(-5vh + ${ i * 25}px)` }} className={styles.cardContainer} ref={container}>
 			<div
 				className={styles.card}
 			>
 				<SpotlightCard className="custom-spotlight-card h-full" spotlightColor={color}>
+					<ProjectLink href={`/projects/${projectSlug(title)}`} className="absolute inset-0 z-10 rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"><span className="sr-only">View {title} project details</span></ProjectLink>
 					<h2 className="text-zinc-200">{title}</h2>
 					<div className={styles.body}>
 						<div className={styles.description}>
 							<p className="font-sans text-zinc-200">{description}</p>
-							<div className="mt-4 flex gap-3">
+							<div className="relative z-20 mt-4 flex gap-3">
 								{link && link !== "#" && (
 									<Button
 										variant="outline"
@@ -68,16 +65,15 @@ const Card = memo(({ title, description, src, link, git_link, color, i }: any) =
 							</div>
 						</div>
 
-						<div className={styles.imageContainer}>
+						<div className={styles.imageContainer} data-project-media={projectSlug(title)} style={{ viewTransitionName: `project-${projectSlug(title)}` } as React.CSSProperties}>
 							<motion.div style={{ scale: imageScale }} className={`${styles.inner} object-contain`}>
-								<Image fill src={`/images/${src}`} sizes="(max-width: 768px) 100vw, 50vw" alt="image" priority />
+								<Image fill src={projectCover(src)} sizes="(max-width: 768px) 100vw, 50vw" alt={`${title} website preview`} />
 							</motion.div>
 						</div>
 					</div>
 				</SpotlightCard>
 			</div>
 		</div>
-				</Link>
 	)
 })
 
