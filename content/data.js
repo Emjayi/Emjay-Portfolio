@@ -55,23 +55,6 @@ export const projects = [
 	git_link: null
 },
 {
-	title: "Torghabe Bazar",
-	description:
-		"An eCommerce platform for Torghabe Bazar, leading  Torghabe city marketplace.",
-	date: "2025-01-20",
-	author: "Emjay Sepahi",
-	category: "Ecommerce",
-	tags: "nextjs, ecommerce, food-industry, protein-products, ui-ux",
-	image: "/images/Tbazar.png",
-	body:
-		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
-	src: "Tbazar.png",
-	images: [],
-	link: "https://torghabebazar.ir/",
-	color: "#4e0b0bff",
-	git_link: null
-},
-{
 	title: "Petros",
 	description:
 		"A modern eCommerce platform for Petros, a leading Iranian producer of sausages, cold cuts, and protein products. Built to provide a fast, intuitive shopping experience while showcasing the brand's diverse product catalog.",
@@ -115,7 +98,7 @@ export const projects = [
 	tags: "unreal-engine, pixel-streaming, 3d, interior-design, virtual-showroom",
 	image: "/images/kerpo.jpg",
 	body:
-		"Kerpino MVP demonstrates the potential of Unreal Engine Pixel Streaming by delivering high-fidelity, browser-based 3D experiences for architecture and interior design visualization.",
+	"Kerpino MVP demonstrates the potential of Unreal Engine Pixel Streaming by delivering high-fidelity, browser-based 3D experiences for architecture and interior design visualization.",
 	src: "kerpo.jpg",
 	images: [],
 	link: "https://kerpino.vercel.app/",
@@ -125,14 +108,14 @@ export const projects = [
 {
 	title: "Baroque",
 	description:
-		"Corporate website for Baroque, a construction and engineering company established in 2010. The platform highlights the company's expertise, portfolio, and services through a modern, responsive web experience.",
+	"Corporate website for Baroque, a construction and engineering company established in 2010. The platform highlights the company's expertise, portfolio, and services through a modern, responsive web experience.",
 	date: "2024-01-18",
 	author: "Emjay Sepahi",
 	category: "Corporate Website",
 	tags: "construction, corporate, nextjs, responsive, ui-ux",
 	image: "/images/baroque.png",
 	body:
-		"Baroque features a clean, modern corporate identity, presenting the company's history, engineering expertise, and construction projects with a strong focus on usability and visual design.",
+	"Baroque features a clean, modern corporate identity, presenting the company's history, engineering expertise, and construction projects with a strong focus on usability and visual design.",
 	src: "baroque.png",
 	images: [],
 	link: "https://baroquegp.vercel.app/",
@@ -168,10 +151,27 @@ export const projects = [
 		color: "#604f22ff"
 	},
 	{
-	title: "Guard Home",
-	description:
+		title: "Torghabe Bazar",
+		description:
+			"An eCommerce platform for Torghabe Bazar, leading  Torghabe city marketplace.",
+		date: "2025-01-20",
+		author: "Emjay Sepahi",
+		category: "Ecommerce",
+		tags: "nextjs, ecommerce, food-industry, protein-products, ui-ux",
+		image: "/images/Tbazar.png",
+		body:
+			"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
+		src: "Tbazar.png",
+		images: [],
+		link: "https://torghabebazar.ir/",
+		color: "#4e0b0bff",
+		git_link: null
+	},
+	{
+		title: "Guard Home",
+		description:
 		"An eCommerce platform for Guard Home, a retail business specializing in mobile screen protectors, camera protectors, and protective accessories, backed by a physical store in Mashhad.",
-	date: "2025-01-20",
+		date: "2025-01-20",
 	author: "Emjay Sepahi",
 	category: "Ecommerce",
 	tags: "nextjs, ecommerce, mobile-accessories, retail, responsive-design",
