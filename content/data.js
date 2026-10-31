@@ -65,7 +65,7 @@ export const projects = [
 	image: "/images/Tbazar.png",
 	body:
 		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
-	src: "petros.png",
+	src: "Tbazar.png",
 	images: [],
 	link: "https://torghabebazar.ir/",
 	color: "#4e0b0bff",
@@ -79,7 +79,7 @@ export const projects = [
 	author: "Emjay Sepahi",
 	category: "Ecommerce",
 	tags: "nextjs, ecommerce, food-industry, protein-products, ui-ux",
-	image: "/images/kerpo.jpg",
+	image: "/images/petros.png",
 	body:
 		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
 	src: "petros.png",
