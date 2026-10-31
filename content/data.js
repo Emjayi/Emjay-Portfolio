@@ -38,6 +38,23 @@ export const posts = [
 // Projects collection - Main portfolio projects
 export const projects = [
 {
+	title: "Rayler",
+	description:
+		"Rayler is a multi-tenant business platform for building an online presence and managing daily operations through connected workspaces, industry-specific tools, and AI-assisted workflows.",
+	date: "2025-01-20",
+	author: "Emjay Sepahi",
+	category: "Business Platform / SaaS",
+	tags: "nextjs, typescript, nestjs, saas, multi-tenant, postgresql, supabase, business-management, ai-agents, workflows",
+	image: "/images/rayler.png",
+	body:
+		"Rayler (formerly CodeSense) is an evolving business operating platform built around a shared workspace rather than a single-purpose online store. Its architecture combines Next.js and TypeScript interfaces with a modular NestJS backend, PostgreSQL/Supabase data storage, shared identity and roles, business dashboards, and public-facing sites.\n\nThe most developed industry focus is cafes and restaurants, including digital menus and QR/table-ordering workflows. The broader product roadmap also covers appointments, real estate, shops, and education. Custom agents, repeatable automations, creator resources, and optional managed creative services are central to the longer-term vision; features vary in implementation maturity and are not all verified as production-ready.",
+	src: "rayler.png",
+	images: [],
+	link: "https://rayler.ir/",
+	color: "#4e0b0bff",
+	git_link: null
+},
+{
 	title: "Torghabe Bazar",
 	description:
 		"An eCommerce platform for Torghabe Bazar, leading  Torghabe city marketplace.",
@@ -45,7 +62,7 @@ export const projects = [
 	author: "Emjay Sepahi",
 	category: "Ecommerce",
 	tags: "nextjs, ecommerce, food-industry, protein-products, ui-ux",
-	image: "/images/kerpo.jpg",
+	image: "/images/Tbazar.png",
 	body:
 		"Petros is a full-featured eCommerce solution designed for one of Iran's established protein brands, offering a seamless online shopping experience with a modern and responsive interface.",
 	src: "petros.png",
@@ -74,14 +91,14 @@ export const projects = [
 {
 	title: "Sol Studio",
 	description:
-		"A multi-tenant platform developed for Sol Studio, a digital agency, enabling the management of multiple client workspaces, projects, and services from a unified dashboard.",
+		"An agency operations workspace for coordinating clients, creative projects, teams, deadlines, and service delivery across multiple workspaces in one connected dashboard.",
 	date: "2024-01-20",
 	author: "Emjay Sepahi",
-	category: "Multi-Tenant SaaS",
-	tags: "nextjs, saas, multi-tenant, dashboard, agency, prisma",
+	category: "Agency Operations SaaS",
+	tags: "nextjs, typescript, saas, multi-tenant, agency-management, project-management, client-workspaces, prisma, dashboard",
 	image: "/images/kerpo.jpg",
 	body:
-		"Sol Studio is a scalable multi-tenant application built for a digital agency, allowing multiple businesses to operate independently while sharing the same secure platform architecture.",
+		"Sol Studio is an agency-focused platform for bringing client relationships, project delivery, and internal operations into one workspace. The multi-tenant approach supports independent client and team contexts while organizing work around projects, assignments, deadlines, roles, and actionable dashboards.\n\nIts product direction includes task boards, milestones, team capacity and workload, content calendars with approval flows, seller and creator collaboration, HR processes, and revenue/expense visibility. Sol Studio has its own agency identity while relating to the wider Rayler ecosystem. Those advanced areas describe the platform roadmap and ongoing development, not a claim that every module has shipped.",
 	src: "sol.png",
 	images: [],
 	link: "https://solstudio.pro/",
